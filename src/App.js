@@ -10,6 +10,7 @@ import SignUpPage from './components/SignUpPage';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './components/Dashboard';
 
+
 function App() {
   return (
     <Router>

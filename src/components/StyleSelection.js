@@ -3,29 +3,29 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 // Define styles based on gender
 const maleStyles = [
-  { id: 1, name: 'Masculine Style 1', image: '/male_styles/male_style_1.jpg' },
-  { id: 2, name: 'Masculine Style 2', image: '/male_styles/male_style_2.jpg' },
-  { id: 3, name: 'Masculine Style 3', image: '/male_styles/male_style_3.jpg' },
-  { id: 4, name: 'Masculine Style 4', image: '/male_styles/male_style_4.jpg' },
-  { id: 5, name: 'Masculine Style 5', image: '/male_styles/male_style_5.jpg' },
-  { id: 6, name: 'Masculine Style 6', image: '/male_styles/male_style_6.jpg' },
-  { id: 7, name: 'Masculine Style 7', image: '/male_styles/male_style_7.jpg' },
-  { id: 8, name: 'Masculine Style 8', image: '/male_styles/male_style_8.jpg' },
-  { id: 9, name: 'Masculine Style 9', image: '/male_styles/male_style_9.jpg' },
-  { id: 10, name: 'Masculine Style 10', image: '/male_styles/male_style_10.jpg' },
+  { id: 1, name: 'Masculine Style 1', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_1.jpg' },
+  { id: 2, name: 'Masculine Style 2', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_2.jpg' },
+  { id: 3, name: 'Masculine Style 3', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_3.jpg' },
+  { id: 4, name: 'Masculine Style 4', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_4.jpg' },
+  { id: 5, name: 'Masculine Style 5', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_5.jpg' },
+  { id: 6, name: 'Masculine Style 6', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_6.jpg' },
+  { id: 7, name: 'Masculine Style 7', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_7.jpg' },
+  { id: 8, name: 'Masculine Style 8', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_8.jpg' },
+  { id: 9, name: 'Masculine Style 9', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_9.jpg' },
+  { id: 10, name: 'Masculine Style 10', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_10.jpg' },
 ];
 
 const femaleStyles = [
-  { id: 1, name: 'Feminine Style 1', image: '/female_styles/female_style_1.jpg' },
-  { id: 2, name: 'Feminine Style 2', image: '/female_styles/female_style_2.jpg' },
-  { id: 3, name: 'Feminine Style 3', image: '/female_styles/female_style_3.jpg' },
-  { id: 4, name: 'Feminine Style 4', image: '/female_styles/female_style_4.jpg' },
-  { id: 5, name: 'Feminine Style 5', image: '/female_styles/female_style_5.jpg' },
-  { id: 6, name: 'Feminine Style 6', image: '/female_styles/female_style_6.jpg' },
-  { id: 7, name: 'Feminine Style 7', image: '/female_styles/female_style_7.jpg' },
-  { id: 8, name: 'Feminine Style 8', image: '/female_styles/female_style_8.jpg' },
-  { id: 9, name: 'Feminine Style 9', image: '/female_styles/female_style_9.jpg' },
-  { id: 10, name: 'Feminine Style 10', image: '/female_styles/female_style_10.jpg' },
+  { id: 1, name: 'Feminine Style 1', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_1.jpg' },
+  { id: 2, name: 'Feminine Style 2', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_2.jpg' },
+  { id: 3, name: 'Feminine Style 3', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_3.jpg' },
+  { id: 4, name: 'Feminine Style 4', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_4.jpg' },
+  { id: 5, name: 'Feminine Style 5', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_5.jpg' },
+  { id: 6, name: 'Feminine Style 6', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_6.jpg' },
+  { id: 7, name: 'Feminine Style 7', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_7.jpg' },
+  { id: 8, name: 'Feminine Style 8', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_8.jpg' },
+  { id: 9, name: 'Feminine Style 9', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_9.jpg' },
+  { id: 10, name: 'Feminine Style 10', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_10.jpg' },
 ];
 
 function StyleSelection() {

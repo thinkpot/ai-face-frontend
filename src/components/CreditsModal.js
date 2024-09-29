@@ -17,7 +17,7 @@ const CreditsModal = ({ isOpen, onClose, userId }) => {
         return;
       }
 
-      const { data } = await axios.post('http://localhost:5000/api/payment/create-order', {
+      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/payment/create-order1`, {
         amount: parseInt(creditsToAdd), // amount in paise
       });
 
@@ -29,7 +29,7 @@ const CreditsModal = ({ isOpen, onClose, userId }) => {
         description: `Add ${creditsToAdd} credits`,
         order_id: data.order.id,
         handler: async function (response) {
-          const verify = await axios.post('http://localhost:5000/api/payment/verify-payment', {
+          const verify = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/payment/verify-payment`, {
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
@@ -67,7 +67,7 @@ const CreditsModal = ({ isOpen, onClose, userId }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" style={{margin:0}}>
       <div className="bg-white rounded-lg shadow-lg p-8 w-96">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold text-gray-800">Add Credits</h2>

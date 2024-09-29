@@ -14,7 +14,7 @@ const GoogleLoginButton = () => {
 
     if (response.credential) {
       // Send token to your backend for verification and authentication
-      fetch('http://localhost:5000/auth/google/callback', {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/google/callback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

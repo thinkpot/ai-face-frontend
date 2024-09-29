@@ -25,23 +25,67 @@ function UploadPage() {
   const navigate = useNavigate();
   const { gender, style } = location.state || {};
 
+
+
   useEffect(() => {
     // Check if the user is logged in
     const token = localStorage.getItem('token');
     if (!token) {
       setIsModalOpen(true); // Open the modal if not logged in
     } else {
-      // You could also verify the token with an API call here
-      axios.get('http://localhost:5000/verify-token', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      }).catch(() => {
-        setIsModalOpen(true); // If token is invalid or expired, open modal
-        console.log("Removing token");
-        localStorage.removeItem('token'); // Clear the invalid token
-      });
+      verifyToken(token);
     }
 
+    const fetchCharges = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pricing`);
+        console.log("Pricing ", response.data)
+        setCharges(response.data.data); // Set the charges from the API response
+      } catch (error) {
+        console.error('Error fetching charges:', error);
+      }
+    };
+
+    fetchCharges();
+
   }, []);
+
+  const verifyToken = async (token) => {
+    try {
+      await axios.get(`${process.env.REACT_APP_BACKEND_URL}/verify-token`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      await fetchUserId(); // Fetch user ID if token is valid
+    } catch (error) {
+      console.log("Removing invalid token");
+      localStorage.removeItem('token'); // Clear invalid token
+      setIsModalOpen(true); // Open modal if token is invalid
+    }
+  };
+
+  const fetchUserId = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUserId(response.data.userId); // Set userId
+    }
+  };
+
+
+  // const fetchUserId = async () => {
+  //   const token = localStorage.getItem('token');
+  //   const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/profile`, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`, // Add your JWT or any other token here
+  //     },
+  //   });
+  //   console.log("response ", response.data)
+  //   setUserId(response.data.userId); // Assuming API response has userId
+  // };
 
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
@@ -73,9 +117,10 @@ function UploadPage() {
     const formData = new FormData();
     formData.append('file', zipContent);
     formData.append('gender', gender);
+    formData.append('style', style.image)
 
     try {
-      await axios.post('http://localhost:5000/train', formData, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/train`, formData, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'multipart/form-data',
@@ -108,6 +153,7 @@ function UploadPage() {
     const token = response.credential; // Assuming Google returns a credential
     localStorage.setItem('token', token);
     setIsModalOpen(false); // Close the modal after successful login
+    fetchUserId();
   };
 
   const handleLoginError = (error) => {
@@ -121,29 +167,7 @@ function UploadPage() {
     setIsPaymentModalOpen(false); // Close the payment modal
   };
 
-  const fetchUserId = async () => {
-    const token = localStorage.getItem('token');
-    const response = await axios.get(`http://localhost:5000/user/profile`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Add your JWT or any other token here
-      },
-    });
-    console.log("response ", response.data)
-    setUserId(response.data.userId); // Assuming API response has userId
-  };
-  fetchUserId();
 
-  const fetchCharges = async () => {
-    try {
-      const response = await axios.get(`http://localhost:5000/api/pricing`);
-      console.log("Pricing ", response.data)
-      setCharges(response.data.data); // Set the charges from the API response
-    } catch (error) {
-      console.error('Error fetching charges:', error);
-    }
-  };
-
-  fetchCharges();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -183,7 +207,14 @@ function UploadPage() {
           </div>
 
           <button
-            onClick={() => setIsPaymentModalOpen(true)} // Open payment modal
+            onClick={() => {
+              if (userId) {
+                setIsPaymentModalOpen(true); // Proceed to payment if userId exists
+              } else {
+                alert('Please log in to proceed.');
+                setIsModalOpen(true); // Open login modal if not logged in
+              }
+            }} // Open payment modal
             className={`relative mt-8 px-6 py-3 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold hover:from-green-500 hover:to-blue-600 transition-transform transform hover:scale-105 focus:outline-none ${zipping || uploading ? 'cursor-wait' : ''}`}
             disabled={zipping || uploading}
           >

@@ -20,14 +20,14 @@ const Dashboard = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const { data } = await axios.get('http://localhost:5000/user/profile', {
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         setUser(data);
 
-        const modelResponse = await axios.get('http://localhost:5000/user/models', {
+        const modelResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/models`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -55,7 +55,7 @@ const Dashboard = () => {
   const fetchImages = async () => {
     try {
       const token = localStorage.getItem('token');
-      const imageResponse = await axios.get('http://localhost:5000/user/images', {
+      const imageResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/images`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -88,7 +88,7 @@ const Dashboard = () => {
       setLoadingImage(true);
 
       const response = await axios.post(
-        'http://localhost:5000/generate/generate-image',
+        `${process.env.REACT_APP_BACKEND_URL}/generate/generate-image`,
         {
           version: selectedModel.version,
           prompt: prompt,
@@ -281,7 +281,7 @@ const Dashboard = () => {
                     <img
                       src={image}  // Updated to directly reference the image URL
                       alt={`Generated Image ${index + 1}`}
-                      className="w-full h-auto rounded-lg"
+                      className="w-full h-auto rounded-lg aspect-square object-contain"
                     />
 
                     <DownloadIcon className="m-5 cursor-pointer absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded w-10"
