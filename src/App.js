@@ -9,6 +9,7 @@ import Header from './components/Header';
 import SignUpPage from './components/SignUpPage';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './components/Dashboard';
+import LandingPage from './components/LandingPage';
 
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<GenderSelection />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/gender" element={<GenderSelection />} />
         <Route path="/styles" element={<StyleSelection />} />
         <Route path="/generate" element={<GeneratePage />} />
         <Route path="/upload" element={<UploadPage />} />

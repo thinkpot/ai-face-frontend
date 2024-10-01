@@ -84,7 +84,7 @@ const Header = () => {
           className="text-2xl font-bold ml-4 cursor-pointer"
           onClick={handleLogoClick}
         >
-          Faceshot Ai
+          Tasvir
         </h1>
       </div>
 
