@@ -28,7 +28,7 @@ const LandingPage = () => {
             </section>
 
             {/* Redesigned Upload Photos Section */}
-            <section className="mt-10 py-12 bg-white rounded-lg max-w-5xl mx-auto px-6" style={{width:"100%;"}}>
+            <section className="mt-10 py-12 bg-white rounded-lg max-w-5xl mx-auto px-6" style={{ width: "100%;" }}>
                 <h3 className="text-4xl font-bold mb-10 text-center text-gray-800">
                     Upload Your Photos
                 </h3>
@@ -178,7 +178,7 @@ const LandingPage = () => {
             </section>
 
             {/* Footer Section */}
-            <footer className="mt-10 py-6 bg-gray-800 text-white text-center w-full" style={{background: "#03045e"}}>
+            <footer className="mt-10 py-6 bg-gray-800 text-white text-center w-full" style={{ background: "#03045e" }}>
                 <p className="text-lg font-semibold">Tasvir</p>
                 <div className="mt-4">
                     <a href="/privacy" className="mx-4 hover:underline">Privacy Policy</a>
@@ -188,15 +188,6 @@ const LandingPage = () => {
                 </div>
                 <p className="mt-4 text-sm">© 2024 Tasvir. All rights reserved.</p>
             </footer>
-
-
-
-
-
-
-
-
-
 
         </div>
     );

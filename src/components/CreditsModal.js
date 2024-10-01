@@ -17,7 +17,7 @@ const CreditsModal = ({ isOpen, onClose, userId }) => {
         return;
       }
 
-      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/payment/create-order1`, {
+      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/payment/create-order`, {
         amount: parseInt(creditsToAdd), // amount in paise
       });
 
