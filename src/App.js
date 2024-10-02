@@ -10,6 +10,7 @@ import SignUpPage from './components/SignUpPage';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './components/Dashboard';
 import LandingPage from './components/LandingPage';
+import ModelNamePage from './components/ModelNamePage';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/gender" element={<GenderSelection />} />
         <Route path="/styles" element={<StyleSelection />} />
+        <Route path="/model-name" element={<ModelNamePage />} />
         <Route path="/generate" element={<GeneratePage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />

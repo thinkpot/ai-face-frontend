@@ -257,8 +257,11 @@ const Dashboard = () => {
                     onClick={() => handleRowClick(model)}  // Handle click to open modal
                   >
                     <h3 className="text-lg font-semibold mb-2 truncate">
-                      Model ID: <span className="break-words">{model.modelId}</span>
+                      Model Name: <span className="break-words">{model.modelName}</span>
                     </h3>
+                    {/* <p className="text-gray-600 mb-2">
+                      Model ID: <span className="break-words">{model.modelId}</span>
+                    </p> */}
                     <p className="text-gray-600 mb-2">
                       Trigger Word: <span className="break-words">{model.trigger_word}</span>
                     </p>

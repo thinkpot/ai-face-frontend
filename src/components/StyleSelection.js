@@ -43,7 +43,7 @@ function StyleSelection() {
   const handleGenerateImage = () => {
     const selectedStyle = styles.find(style => style.id === selectedStyleId);
     if (selectedStyle) {
-      navigate('/upload', { state: { gender, style: selectedStyle } });
+      navigate('/model-name', { state: { gender, style: selectedStyle } });
     } else {
       alert("Please select a style.");
     }

@@ -23,7 +23,7 @@ function UploadPage() {
   });
   const location = useLocation();
   const navigate = useNavigate();
-  const { gender, style } = location.state || {};
+  const { gender, style, modelName } = location.state || {};
 
 
 
@@ -118,6 +118,7 @@ function UploadPage() {
     formData.append('file', zipContent);
     formData.append('gender', gender);
     formData.append('style', style.image)
+    formData.append('modelName', modelName)
 
     try {
       await axios.post(`${process.env.REACT_APP_BACKEND_URL}/train`, formData, {
@@ -208,13 +209,15 @@ function UploadPage() {
 
           <button
             onClick={() => {
-              if (userId) {
-                setIsPaymentModalOpen(true); // Proceed to payment if userId exists
+              if (photos.length < 10) {
+                alert('Please upload at least 10 photos.');
+              } else if (userId) {
+                setIsPaymentModalOpen(true); // Proceed to payment if userId exists and enough photos are uploaded
               } else {
                 alert('Please log in to proceed.');
                 setIsModalOpen(true); // Open login modal if not logged in
               }
-            }} // Open payment modal
+            }}
             className={`relative mt-8 px-6 py-3 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold hover:from-green-500 hover:to-blue-600 transition-transform transform hover:scale-105 focus:outline-none ${zipping || uploading ? 'cursor-wait' : ''}`}
             disabled={zipping || uploading}
           >

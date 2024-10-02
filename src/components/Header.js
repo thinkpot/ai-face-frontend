@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CurrencyDollarIcon, MenuIcon, XIcon } from '@heroicons/react/solid';
 import './Header.css';
 import Button from './Button';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo5.png';
 import CreditsModal from './CreditsModal'; // Import CreditsModal
 import axios from 'axios';
 
@@ -81,7 +81,7 @@ const Header = () => {
           onClick={handleLogoClick}
         />
         <h1
-          className="text-2xl font-bold ml-4 cursor-pointer"
+          className="text-2xl font-bold ml-2 cursor-pointer"
           onClick={handleLogoClick}
         >
           Tasvir

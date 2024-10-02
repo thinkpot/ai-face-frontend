@@ -1,7 +1,14 @@
 import React from 'react';
 import Carousel from './Carousel'; // Reuse your working Carousel component
+import CreateHeadshotButton from './CreateHeadshotButton';
+import logo from '../assets/logo5.png';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
+    const navigate = useNavigate();
+    const handleLogoClick = () => {
+        navigate('/'); // Redirect to the homepage when clicking the logo
+    };
     return (
         <div className="min-h-screen bg-white-50 flex flex-col items-center">
 
@@ -13,9 +20,7 @@ const LandingPage = () => {
                 <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
                     Get professional AI headshots in minutes with our new AI headshot generator. Save hundreds of dollars and hours of your time. Built by AI researchers.
                 </p>
-                <button className="mt-8 px-6 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-lg text-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
-                    Create your Headshots
-                </button>
+                <CreateHeadshotButton onClick={() => window.location.href = '/gender'} />
                 <div className="mt-4">
                     <p className="text-gray-600">Trusted by leading professionals</p>
                     {/* Add trusted logos if needed */}
@@ -66,9 +71,7 @@ const LandingPage = () => {
                 </div>
                 {/* Create Headshot Button */}
                 <div className="mt-10 text-center">
-                    <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-lg text-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out hover:shadow-xl">
-                        Create Your Headshot
-                    </button>
+                    <CreateHeadshotButton onClick={() => window.location.href = '/gender'} />
                 </div>
             </section>
 
@@ -82,9 +85,8 @@ const LandingPage = () => {
                         Our advanced AI technology allows you to create stunning images from simple text prompts.
                         Whether it's a portrait, landscape, or abstract art, the possibilities are endless!
                     </p>
-                    <button className="mt-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-lg text-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
-                        Start Generating Images
-                    </button>
+
+                    <CreateHeadshotButton onClick={() => window.location.href = '/gender'} text={"Start Generating Images"} />
                 </div>
                 <div className="flex-1 flex justify-center">
                     <img
@@ -110,12 +112,7 @@ const LandingPage = () => {
                         Transform your selfies into stunning professional headshots perfect for your LinkedIn profile.
                         Stand out in your industry with a polished look!
                     </p>
-                    <button
-                        onClick={() => window.location.href = '/gender'}
-                        className="mt-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-lg text-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-                    >
-                        Create Your Headshot
-                    </button>
+                    <CreateHeadshotButton onClick={() => window.location.href = '/gender'} />
                 </div>
             </section>
 
@@ -128,12 +125,7 @@ const LandingPage = () => {
                     <p className="text-gray-600 text-center md:text-left mb-4">
                         Stand out on platforms like Instagram and Facebook with a professional avatar tailored just for you.
                     </p>
-                    <button
-                        onClick={() => window.location.href = '/gender'}
-                        className="mt-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-lg text-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-                    >
-                        Create Your Avatar
-                    </button>
+                    <CreateHeadshotButton onClick={() => window.location.href = '/gender'} text={"Create Your Avatar"} />
                 </div>
                 <div className="md:w-1/2 mt-6 md:mt-0 flex justify-center">
                     <img
@@ -169,17 +161,25 @@ const LandingPage = () => {
                 <p className="text-gray-600 mb-6">
                     Start creating amazing AI headshots today!
                 </p>
-                <button
-                    onClick={() => window.location.href = '/gender'}
-                    className="mt-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-lg text-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-                >
-                    Create Your Headshot
-                </button>
+                <CreateHeadshotButton onClick={() => window.location.href = '/gender'} />
             </section>
 
             {/* Footer Section */}
             <footer className="mt-10 py-6 bg-gray-800 text-white text-center w-full" style={{ background: "#03045e" }}>
-                <p className="text-lg font-semibold">Tasvir</p>
+                <div className="flex items-center justify-center">
+                    <img
+                        src={logo}
+                        alt="Logo"
+                        className="w-12 h-12 cursor-pointer"
+                        onClick={handleLogoClick}
+                    />
+                    <h1
+                        className="text-2xl font-bold ml-2 cursor-pointer"
+                        onClick={handleLogoClick}
+                    >
+                        Tasvir
+                    </h1>
+                </div>
                 <div className="mt-4">
                     <a href="/privacy" className="mx-4 hover:underline">Privacy Policy</a>
                     <a href="/contact" className="mx-4 hover:underline">Contact Us</a>
