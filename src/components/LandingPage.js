@@ -143,7 +143,7 @@ const LandingPage = () => {
                     Our pricing is the lowest in the market with the best results!
                     Get started with our competitive rates:
                 </p>
-                <div className="flex justify-center space-x-8 mb-6">
+                <div className="flex justify-center space-x-2 mb-6">
                     <div className="p-6 border border-gray-300 rounded-lg shadow-md">
                         <h4 className="text-2xl font-bold text-gray-800">Model Training</h4>
                         <p className="text-2xl font-semibold text-blue-600">₹300 (~$4)</p>

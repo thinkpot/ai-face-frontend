@@ -15,7 +15,8 @@ const Dashboard = () => {
   const [loadingImage, setLoadingImage] = useState(false);
   const [filter, setFilter] = useState('all'); // Filter for models
   const [activeTab, setActiveTab] = useState('models'); // State to switch between models and images
-
+  const [noImagesMessage, setNoImagesMessage] = useState('');
+  
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -55,16 +56,21 @@ const Dashboard = () => {
   const fetchImages = async () => {
     try {
       const token = localStorage.getItem('token');
-      const imageResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/images`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/images`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      setImages(imageResponse.data.images);
-
+      
+      if (response.data.images && response.data.images.length === 0) {
+        setNoImagesMessage("No images found for the user.");
+        setImages([]); // Clear images if no images found
+      } else {
+        setImages(response.data.images);
+        setNoImagesMessage(''); // Clear the message if images are found
+      }
     } catch (err) {
-      setError('Error fetching images');
+      
       console.error('Error fetching images:', err);
     }
   };
@@ -357,3 +363,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+/* Working */
