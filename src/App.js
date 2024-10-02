@@ -11,7 +11,10 @@ import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './components/Dashboard';
 import LandingPage from './components/LandingPage';
 import ModelNamePage from './components/ModelNamePage';
-
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsAndConditions from './components/TermsCondition'
+import ContactUs from './components/ContactUs'
+import AboutUs from './components/AboutUs'
 
 function App() {
   return (
@@ -27,6 +30,10 @@ function App() {
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/signup" element={<SignUpPage />} /> {/* Add signup route */}
         <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-conditions" element={<TermsAndConditions />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/about" element={<AboutUs />} />
         
       </Routes>
     </Router>

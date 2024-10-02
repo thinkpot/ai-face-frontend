@@ -181,10 +181,11 @@ const LandingPage = () => {
                     </h1>
                 </div>
                 <div className="mt-4">
-                    <a href="/privacy" className="mx-4 hover:underline">Privacy Policy</a>
+                    <a href="/privacy-policy" className="mx-4 hover:underline">Privacy Policy</a>
+                    <a href="/terms-conditions" className="mx-4 hover:underline">Terms & Conditions</a>
                     <a href="/contact" className="mx-4 hover:underline">Contact Us</a>
                     <a href="/about" className="mx-4 hover:underline">About Us</a>
-                    <a href="/generate" className="mx-4 hover:underline">Generate Image</a>
+                    
                 </div>
                 <p className="mt-4 text-sm">© 2024 Tasvir. All rights reserved.</p>
             </footer>
