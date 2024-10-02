@@ -21,6 +21,8 @@ function UploadPage() {
     modelTrainingCharge: 0,
     imageGenerationCharge: 0,
   });
+
+  const [credits, setCredits] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const { gender, style, modelName } = location.state || {};
@@ -48,7 +50,25 @@ function UploadPage() {
 
     fetchCharges();
 
+    
+
+    
+
   }, []);
+
+  const fetchCredits = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/get-credits`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      setCredits(response.data.credits);
+    } catch (error) {
+      console.error('Error fetching credits:', error);
+    }
+  };
+  fetchCredits();
+    console.log("Credits i have ", credits)
 
   const verifyToken = async (token) => {
     try {
@@ -74,18 +94,6 @@ function UploadPage() {
       setUserId(response.data.userId); // Set userId
     }
   };
-
-
-  // const fetchUserId = async () => {
-  //   const token = localStorage.getItem('token');
-  //   const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/profile`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`, // Add your JWT or any other token here
-  //     },
-  //   });
-  //   console.log("response ", response.data)
-  //   setUserId(response.data.userId); // Assuming API response has userId
-  // };
 
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
@@ -155,6 +163,7 @@ function UploadPage() {
     localStorage.setItem('token', token);
     setIsModalOpen(false); // Close the modal after successful login
     fetchUserId();
+    
   };
 
   const handleLoginError = (error) => {
@@ -167,7 +176,6 @@ function UploadPage() {
     createZipFile();
     setIsPaymentModalOpen(false); // Close the payment modal
   };
-
 
 
   return (
@@ -211,8 +219,15 @@ function UploadPage() {
             onClick={() => {
               if (photos.length < 10) {
                 alert('Please upload at least 10 photos.');
-              } else if (userId) {
-                setIsPaymentModalOpen(true); // Proceed to payment if userId exists and enough photos are uploaded
+              } 
+              else if (userId) {
+                if(credits < charges.modelTrainingCharge + charges.imageGenerationCharge){
+                  setIsPaymentModalOpen(true);
+                  // Proceed to payment if userId exists and enough photos are uploaded
+                }else{
+                  createZipFile();
+                }
+                 
               } else {
                 alert('Please log in to proceed.');
                 setIsModalOpen(true); // Open login modal if not logged in
@@ -275,3 +290,5 @@ function UploadPage() {
 }
 
 export default UploadPage;
+
+/* Working */
