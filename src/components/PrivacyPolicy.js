@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from './Footer'
+import Footer from './Footer';
 
 const PrivacyPolicy = () => {
     return (
@@ -8,131 +8,150 @@ const PrivacyPolicy = () => {
                 <h1 className="text-4xl font-bold text-center mb-8">Privacy Policy</h1>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
+                    <h2 className="text-2xl font-semibold mb-4">Privacy Statement</h2>
                     <p>
-                        Welcome to Tasvir. Your privacy is important to us, and this Privacy Policy explains how we
-                        collect, use, and safeguard your personal information when you use our services. By using our services, 
-                        you agree to the collection and use of information as described in this policy. Please read it carefully 
-                        to understand how your data is treated.
+                        This Privacy Policy describes how Fliptrend, operating Tasvir, collects, uses, and shares your personal 
+                        information when you use our services or visit our website.
                     </p>
                 </section>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Information We Collect</h2>
-                    <p>We collect several types of information, including:</p>
-                    <ul className="list-disc ml-6">
-                        <li>
-                            <strong>Personal Identification Information:</strong> This includes your name, email address, contact details,
-                            and payment information, which are necessary to create an account, process payments, and provide personalized services.
-                        </li>
-                        <li>
-                            <strong>Usage Data:</strong> We collect information on how you interact with our website, such as IP address, 
-                            browser type, pages visited, and time spent on pages. This helps us analyze trends and improve our services.
-                        </li>
-                        <li>
-                            <strong>Cookies and Tracking Technologies:</strong> We use cookies and similar tracking technologies to 
-                            monitor activity on our website, store user preferences, and deliver personalized content.
-                        </li>
-                    </ul>
-                </section>
-
-                <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">How We Use Your Information</h2>
-                    <p>Your data is used for various purposes, including:</p>
-                    <ul className="list-disc ml-6">
-                        <li><strong>Service Delivery:</strong> To provide, operate, and maintain our services, including managing your account and processing payments.</li>
-                        <li><strong>Personalization:</strong> To customize our services based on your preferences and improve your overall experience.</li>
-                        <li><strong>Communication:</strong> To contact you regarding updates, notifications, or changes to our services.</li>
-                        <li><strong>Security:</strong> To detect, prevent, and address technical issues, fraud, or unauthorized access to our systems.</li>
-                        <li><strong>Analytics:</strong> To understand user behavior, monitor usage trends, and improve our platform and features.</li>
-                    </ul>
-                </section>
-
-                <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Cookies and Tracking Technologies</h2>
+                    <h3 className="text-xl font-semibold mb-4">WHAT DO WE DO WITH YOUR INFORMATION?</h3>
                     <p>
-                        We use cookies and similar tracking technologies to enhance your experience. Cookies are small text files that are 
-                        stored on your device when you visit our website. These cookies allow us to recognize your browser and remember 
-                        certain information, such as login credentials and user preferences. You can control or disable cookies through 
-                        your browser settings, but this may affect your ability to use certain features of our services.
+                        When you use our AI tools or services, we collect the personal information you provide to us, such as your 
+                        name, email address, and any other information you choose to share.
+                    </p>
+                    <p className="mt-4">
+                        We automatically receive your computer’s internet protocol (IP) address when you interact with our website, 
+                        which helps us learn about your browser and operating system.
+                    </p>
+                    <p className="mt-4">
+                        With your permission, we may send you emails about our services, new features, updates, and other relevant 
+                        information related to your use of our website.
                     </p>
                 </section>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Data Retention</h2>
+                    <h3 className="text-xl font-semibold mb-4">CONSENT</h3>
                     <p>
-                        We will retain your personal data only for as long as is necessary for the purposes outlined in this Privacy Policy.
-                        Once the data is no longer required, we will securely delete or anonymize it. If you wish to delete your account 
-                        or request the removal of your data, please contact us at tasvir.info.1@gmail.com.
+                        <strong>How do you get my consent?</strong>
+                    </p>
+                    <p>
+                        When you provide us with personal information to complete a transaction, verify your credit card, place an 
+                        order, arrange for a delivery or return a purchase, we imply that you consent to our collecting it and using 
+                        it for that specific reason only.
+                    </p>
+                    <p className="mt-4">
+                        If we ask for your personal information for a secondary reason, like marketing, we will either ask you directly 
+                        for your expressed consent or provide you with an opportunity to say no.
+                    </p>
+                    <p className="mt-4">
+                        <strong>How do I withdraw my consent?</strong>
+                    </p>
+                    <p>
+                        If after you opt-in, you change your mind, you may withdraw your consent for us to contact you, for the continued 
+                        collection, use, or disclosure of your information, at any time by contacting us at 
+                        <strong> tasvir.info.1@gmail.com </strong> or mailing us at: <strong> A-72, Vijay Vihar, Rohini, New Delhi, India. </strong>
                     </p>
                 </section>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Third-Party Services</h2>
+                    <h3 className="text-xl font-semibold mb-4">DISCLOSURE</h3>
                     <p>
-                        We may use third-party service providers to facilitate our services, such as payment processors (e.g., Razorpay),
-                        cloud storage, and analytics providers. These third-party services have access to your personal information
-                        only to perform specific tasks on our behalf and are obligated not to disclose or use it for any other purpose.
-                        Each third-party provider has its own privacy policies, and we recommend reviewing them before using their services.
+                        We may disclose your personal information if we are required by law to do so or if you violate our Terms of Service.
                     </p>
                 </section>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Data Security</h2>
+                    <h3 className="text-xl font-semibold mb-4">PAYMENT</h3>
                     <p>
-                        We take data security seriously and implement a variety of measures to protect your personal information.
-                        These include encryption, secure server environments, and limiting access to your data to authorized personnel only.
-                        However, please note that no method of transmission over the internet or method of electronic storage is 100% secure.
-                        While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee absolute security.
+                        We use Razorpay for processing payments. We/Razorpay do not store your card data on their servers. The data is 
+                        encrypted through the Payment Card Industry Data Security Standard (PCI-DSS) when processing payment. Your purchase 
+                        transaction data is only used as long as is necessary to complete your purchase transaction. After that is complete, 
+                        your purchase transaction information is not saved.
+                    </p>
+                    <p className="mt-4">
+                        Our payment gateway adheres to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which 
+                        is a joint effort of brands like Visa, MasterCard, American Express, and Discover.
+                    </p>
+                    <p className="mt-4">
+                        PCI-DSS requirements help ensure the secure handling of credit card information by our store and its service providers.
+                    </p>
+                    <p className="mt-4">
+                        For more insight, you may also want to read the terms and conditions of Razorpay on <a href="https://razorpay.com" className="text-blue-600 underline">https://razorpay.com</a>.
                     </p>
                 </section>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Children's Privacy</h2>
+                    <h3 className="text-xl font-semibold mb-4">THIRD-PARTY SERVICES</h3>
                     <p>
-                        Our services are not directed at individuals under the age of 13, and we do not knowingly collect personal 
-                        information from children under 13. If we become aware that a child under 13 has provided us with personal data, 
-                        we will take steps to remove such information from our records. If you are a parent or guardian and believe that 
-                        your child has provided us with personal information, please contact us at tasvir.info.1@gmail.com.
+                        In general, the third-party providers used by us will only collect, use, and disclose your information to the extent 
+                        necessary to allow them to perform the services they provide to us.
+                    </p>
+                    <p className="mt-4">
+                        However, certain third-party service providers, such as payment gateways and other payment transaction processors, 
+                        have their own privacy policies in respect to the information we are required to provide to them for your purchase-related 
+                        transactions.
+                    </p>
+                    <p className="mt-4">
+                        For these providers, we recommend that you read their privacy policies so you can understand the manner in which your personal 
+                        information will be handled by these providers.
+                    </p>
+                    <p className="mt-4">
+                        In particular, remember that certain providers may be located in or have facilities that are located in a different jurisdiction 
+                        than either you or us. So if you elect to proceed with a transaction that involves the services of a third-party service provider, 
+                        then your information may become subject to the laws of the jurisdiction(s) in which that service provider or its facilities are located.
+                    </p>
+                    <p className="mt-4">
+                        Once you leave our store’s website or are redirected to a third-party website or application, you are no longer governed by this 
+                        Privacy Policy or our website’s Terms of Service.
                     </p>
                 </section>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Your Data Rights</h2>
+                    <h3 className="text-xl font-semibold mb-4">SECURITY</h3>
                     <p>
-                        You have the right to access, modify, or delete your personal information. You can also withdraw consent to 
-                        data processing at any time. If you wish to exercise any of these rights, please contact us at tasvir.info.1@gmail.com 
-                        We will respond to your request within a reasonable timeframe.
+                        To protect your personal information, we take reasonable precautions and follow industry best practices to make sure it is not 
+                        inappropriately lost, misused, accessed, disclosed, altered, or destroyed.
                     </p>
                 </section>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">International Data Transfers</h2>
+                    <h3 className="text-xl font-semibold mb-4">COOKIES</h3>
                     <p>
-                        Your information may be transferred to, and maintained on, servers located outside of your state, province, country, 
-                        or other governmental jurisdiction where the data protection laws may differ from those in your jurisdiction. If you are 
-                        located outside of our primary operating region and choose to provide information to us, please note that we transfer 
-                        your data to that region and process it there.
+                        We use cookies to maintain the session of your user. It is not used to personally identify you on other websites.
                     </p>
                 </section>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Changes to This Policy</h2>
+                    <h3 className="text-xl font-semibold mb-4">AGE OF CONSENT</h3>
                     <p>
-                        We may update our Privacy Policy from time to time. Any changes will be posted on this page with an updated date at 
-                        the top of the policy. We encourage you to review this Privacy Policy periodically for any updates. Your continued use 
-                        of our services after the posting of changes constitutes your acceptance of those changes.
+                        By using this site, you represent that you are at least the age of majority in your state or province of residence, 
+                        or that you are the age of majority in your state or province of residence and you have given us your consent to allow 
+                        any of your minor dependents to use this site.
                     </p>
                 </section>
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
+                    <h3 className="text-xl font-semibold mb-4">CHANGES TO THIS PRIVACY POLICY</h3>
                     <p>
-                        If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:
-                        <br />
-                        <strong>Email:</strong> tasvir.info.1@gmail.com
-                        <br />
-                    
+                        We reserve the right to modify this privacy policy at any time, so please review it frequently. Changes and clarifications 
+                        will take effect immediately upon their posting on the website. If we make material changes to this policy, we will notify 
+                        you here that it has been updated, so that you are aware of what information we collect, how we use it, and under what 
+                        circumstances, if any, we use and/or disclose it.
+                    </p>
+                    <p className="mt-4">
+                        If our store is acquired or merged with another company, your information may be transferred to the new owners so that we may 
+                        continue to sell products to you.
+                    </p>
+                </section>
+
+                <section className="mb-8">
+                    <h3 className="text-xl font-semibold mb-4">QUESTIONS AND CONTACT INFORMATION</h3>
+                    <p>
+                        If you would like to: access, correct, amend or delete any personal information we have about you, register a complaint, or simply 
+                        want more information contact our Privacy Compliance Officer at <strong>A-72, Vijay Vihar, Rohini, New Delhi, India </strong> or by mail at 
+                        <strong> tasvir.info.1@gmail.com </strong>.
                     </p>
                 </section>
             </div>
