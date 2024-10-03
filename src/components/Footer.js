@@ -27,6 +27,7 @@ const Footer = () => {
             <div className="mt-4">
                 <a href="/privacy-policy" className="mx-4 hover:underline">Privacy Policy</a>
                 <a href="/terms-conditions" className="mx-4 hover:underline">Terms & Conditions</a>
+                <a href="/refund-policy" className="mx-4 hover:underline">Refund Policy</a>
                 <a href="/contact" className="mx-4 hover:underline">Contact Us</a>
                 <a href="/about" className="mx-4 hover:underline">About Us</a>
 

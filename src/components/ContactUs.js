@@ -40,13 +40,13 @@ const ContactUs = () => {
                     <h2 className="text-2xl font-semibold mb-4">Contact Details</h2>
                     <div className="space-y-4">
                         <p>
-                            <strong>Email:</strong> heyshahidkhan@gmail.com
+                            <strong>Email:</strong> tasvir.info.1@gmail.com
                         </p>
                         <p>
                             <strong>Phone:</strong> +918800311305
                         </p>
                         <p>
-                            <strong>Address:</strong> Tasvir Inc., New Delhi, India
+                            <strong>Address:</strong> Tasvir, A-72, Vijay Vihar, Rohini, New Delhi, India
                         </p>
                         <p>
                             <strong>Support Hours:</strong> Monday to Friday, 9:00 AM - 7:00 PM (IST)

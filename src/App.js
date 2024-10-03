@@ -15,6 +15,11 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsAndConditions from './components/TermsCondition'
 import ContactUs from './components/ContactUs'
 import AboutUs from './components/AboutUs'
+import RefundPolicy from "./components/RefundPolicy"; // Adjust path accordingly
+import PricingPage from './components/PricingPage'
+
+
+
 
 function App() {
   return (
@@ -34,6 +39,9 @@ function App() {
         <Route path="/terms-conditions" element={<TermsAndConditions />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/pricing" element={<PricingPage />} />
+
         
       </Routes>
     </Router>

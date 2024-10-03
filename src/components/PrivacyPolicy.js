@@ -130,7 +130,7 @@ const PrivacyPolicy = () => {
                     <p>
                         If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:
                         <br />
-                        <strong>Email:</strong> heyshahidkhan@gmail.com
+                        <strong>Email:</strong> tasvir.info.1@gmail.com
                         <br />
                     
                     </p>

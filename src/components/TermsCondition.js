@@ -118,7 +118,7 @@ const TermsAndConditions = () => {
                     <p>
                         If you have any questions or concerns regarding these Terms and Conditions, please contact us at:
                         <br />
-                        <strong>Email:</strong> heyshahidkhan@gmail.com
+                        <strong>Email:</strong> tasvir.info.1@gmail.com
                         
                     </p>
                 </section>

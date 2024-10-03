@@ -2,7 +2,9 @@ import React from 'react';
 import Carousel from './Carousel'; // Reuse your working Carousel component
 import CreateHeadshotButton from './CreateHeadshotButton';
 import logo from '../assets/logo5.png';
+import SubMenu from './SubMenu'
 import { useNavigate } from 'react-router-dom';
+import Footer from './Footer'
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -12,6 +14,7 @@ const LandingPage = () => {
     return (
         <div className="min-h-screen bg-white-50 flex flex-col items-center">
 
+            <SubMenu />
             {/* Main Section */}
             <section className="text-center mt-16">
                 <h2 className="text-5xl font-bold text-gray-800">
@@ -26,6 +29,8 @@ const LandingPage = () => {
                     {/* Add trusted logos if needed */}
                 </div>
             </section>
+
+
 
             {/* Carousel Section */}
             <section className="mt-16 w-full px-8">
@@ -165,30 +170,7 @@ const LandingPage = () => {
             </section>
 
             {/* Footer Section */}
-            <footer className="mt-10 py-6 bg-gray-800 text-white text-center w-full" style={{ background: "#03045e" }}>
-                <div className="flex items-center justify-center">
-                    <img
-                        src={logo}
-                        alt="Logo"
-                        className="w-12 h-12 cursor-pointer"
-                        onClick={handleLogoClick}
-                    />
-                    <h1
-                        className="text-2xl font-bold ml-2 cursor-pointer"
-                        onClick={handleLogoClick}
-                    >
-                        Tasvir
-                    </h1>
-                </div>
-                <div className="mt-4">
-                    <a href="/privacy-policy" className="mx-4 hover:underline">Privacy Policy</a>
-                    <a href="/terms-conditions" className="mx-4 hover:underline">Terms & Conditions</a>
-                    <a href="/contact" className="mx-4 hover:underline">Contact Us</a>
-                    <a href="/about" className="mx-4 hover:underline">About Us</a>
-                    
-                </div>
-                <p className="mt-4 text-sm">© 2024 Tasvir. All rights reserved.</p>
-            </footer>
+            <Footer />
 
         </div>
     );
