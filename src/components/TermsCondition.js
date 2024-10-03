@@ -51,7 +51,7 @@ const TermsAndConditions = () => {
                     <p>
                         Tasvir reserves the right to terminate or suspend your account at any time for violating these Terms and Conditions 
                         or for any other reason deemed appropriate. If your account is terminated, you may lose access to your account data 
-                        and any associated services. You may terminate your account at any time by contacting us at support@tasvir.com.
+                        and any associated services. You may terminate your account at any time by contacting us at tasvir.info.1@gmail.com.
                     </p>
                 </section>
 

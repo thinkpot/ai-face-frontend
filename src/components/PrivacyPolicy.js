@@ -63,7 +63,7 @@ const PrivacyPolicy = () => {
                     <p>
                         We will retain your personal data only for as long as is necessary for the purposes outlined in this Privacy Policy.
                         Once the data is no longer required, we will securely delete or anonymize it. If you wish to delete your account 
-                        or request the removal of your data, please contact us at support@tasvir.com.
+                        or request the removal of your data, please contact us at tasvir.info.1@gmail.com.
                     </p>
                 </section>
 
@@ -93,7 +93,7 @@ const PrivacyPolicy = () => {
                         Our services are not directed at individuals under the age of 13, and we do not knowingly collect personal 
                         information from children under 13. If we become aware that a child under 13 has provided us with personal data, 
                         we will take steps to remove such information from our records. If you are a parent or guardian and believe that 
-                        your child has provided us with personal information, please contact us at support@tasvir.com.
+                        your child has provided us with personal information, please contact us at tasvir.info.1@gmail.com.
                     </p>
                 </section>
 
@@ -101,7 +101,7 @@ const PrivacyPolicy = () => {
                     <h2 className="text-2xl font-semibold mb-4">Your Data Rights</h2>
                     <p>
                         You have the right to access, modify, or delete your personal information. You can also withdraw consent to 
-                        data processing at any time. If you wish to exercise any of these rights, please contact us at support@tasvir.com. 
+                        data processing at any time. If you wish to exercise any of these rights, please contact us at tasvir.info.1@gmail.com 
                         We will respond to your request within a reasonable timeframe.
                     </p>
                 </section>
