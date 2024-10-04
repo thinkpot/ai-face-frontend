@@ -1,10 +1,16 @@
 // src/components/SignUpPage.js
 import React from 'react';
 import GoogleLoginButton from './GoogleLoginButton';
+import { Helmet } from "react-helmet";
+
 
 const SignUpPage = () => {
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-8">
+      <Helmet>
+        <title>Login - Tasvir</title>
+        <meta name="description" content="Log in to Tasvir to access your dashboard and create AI-generated face images." />
+      </Helmet>
       <div className="w-full max-w-lg bg-white border-2 border-gray-100 rounded-3xl shadow-xl p-8 transform hover:scale-105 transition-transform duration-300">
         <h1 className="text-4xl font-extrabold text-center mb-6 text-[#03045E]">
           Create Your Account

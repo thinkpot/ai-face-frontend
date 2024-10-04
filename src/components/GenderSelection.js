@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 
 function GenderSelection() {
     const [selectedGender, setSelectedGender] = useState(null);
@@ -19,6 +20,15 @@ function GenderSelection() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-gray-100 to-gray-300 flex items-center justify-center">
+            <Helmet>
+                <title>Create Your AI Headshot - Choose Gender | Tasvir</title>
+                <meta
+                    name="description"
+                    content="Start your journey to create personalized AI-generated headshots. Choose your gender to get customized image styles with Tasvir's advanced AI technology."
+                />
+                <meta name="keywords" content="AI headshot generator, personalized images, choose gender, Tasvir, AI-generated faces, custom headshots" />
+                <meta name="robots" content="index, follow" />
+            </Helmet>
             <div className="text-center p-8 rounded-xl w-full max-w-4xl">
                 <h1 className="text-4xl font-bold mb-4">AI Face Image Generator</h1>
                 <p className="text-xl text-gray-600 mb-8">Select your gender to begin generating images</p>

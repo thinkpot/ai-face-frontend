@@ -1,18 +1,23 @@
 import React from 'react';
 import Footer from './Footer';
+import { Helmet } from "react-helmet";
 
 const AboutUs = () => {
     return (
         <div className="min-h-screen bg-gray-100 text-gray-800">
+            <Helmet>
+                <title>About Tasvir</title>
+                <meta name="description" content="Learn more about Tasvir, the AI face generator platform." />
+            </Helmet>
             <div className="container mx-auto py-10 px-4">
                 <h1 className="text-4xl font-bold text-center mb-8">About Us</h1>
 
                 <section className="mb-12">
                     <h2 className="text-3xl font-semibold mb-4">Who We Are</h2>
                     <p className="text-lg">
-                        Welcome to <strong>Tasvir</strong>, your go-to platform for personalized AI-generated images! 
-                        Our team is a group of passionate developers, designers, and AI enthusiasts committed to pushing the 
-                        boundaries of creativity through cutting-edge technology. At Tasvir, we believe that everyone deserves 
+                        Welcome to <strong>Tasvir</strong>, your go-to platform for personalized AI-generated images!
+                        Our team is a group of passionate developers, designers, and AI enthusiasts committed to pushing the
+                        boundaries of creativity through cutting-edge technology. At Tasvir, we believe that everyone deserves
                         access to high-quality, customized visuals that represent their unique personality and style. This business operates under <strong>Fliptrend</strong>, where innovation meets creativity.
                     </p>
                 </section>
@@ -20,9 +25,9 @@ const AboutUs = () => {
                 <section className="mb-12">
                     <h2 className="text-3xl font-semibold mb-4">Our Mission</h2>
                     <p className="text-lg">
-                        Our mission is simple: to empower creativity with AI. We aim to provide a platform where users can generate 
-                        hyper-realistic headshots and creative portraits, without needing advanced skills in graphic design. We want 
-                        to make AI-driven creativity accessible and affordable for everyone, whether you're an individual, a brand, or 
+                        Our mission is simple: to empower creativity with AI. We aim to provide a platform where users can generate
+                        hyper-realistic headshots and creative portraits, without needing advanced skills in graphic design. We want
+                        to make AI-driven creativity accessible and affordable for everyone, whether you're an individual, a brand, or
                         an organization, all under the umbrella of <strong>Fliptrend</strong>.
                     </p>
                 </section>
@@ -52,14 +57,14 @@ const AboutUs = () => {
                 <section className="mb-12">
                     <h2 className="text-3xl font-semibold mb-4">Our Story</h2>
                     <p className="text-lg">
-                        Tasvir began as a passion project by our founder, <strong>Shahid Khan</strong>, who was fascinated by the potential 
-                        of artificial intelligence. From humble beginnings in a home office in London, we have grown into a platform that serves 
-                        users worldwide. What started as an experiment in generating artistic images quickly turned into a powerful tool for 
-                        personalized content creation, and we haven't looked back since. Tasvir is proud to operate under the umbrella of 
+                        Tasvir began as a passion project by our founder, <strong>Shahid Khan</strong>, who was fascinated by the potential
+                        of artificial intelligence. From humble beginnings in a home office in London, we have grown into a platform that serves
+                        users worldwide. What started as an experiment in generating artistic images quickly turned into a powerful tool for
+                        personalized content creation, and we haven't looked back since. Tasvir is proud to operate under the umbrella of
                         <strong>Fliptrend</strong>, a company dedicated to driving creativity and innovation in the digital age.
                     </p>
                     <p className="mt-4 text-lg">
-                        Over the years, we have honed our technology, listened to feedback, and expanded our offerings to meet the needs of a 
+                        Over the years, we have honed our technology, listened to feedback, and expanded our offerings to meet the needs of a
                         creative global community. Our journey has been one of constant learning, and we are proud of the platform we have built.
                     </p>
                 </section>
@@ -72,7 +77,7 @@ const AboutUs = () => {
                             <h3 className="text-xl font-bold">Shahid Khan</h3>
                             <p className="text-gray-600">Founder & CEO</p>
                             <p className="mt-2 text-gray-700">
-                                Shahid is the visionary behind Tasvir, with a passion for AI and design. He leads the company with a focus on 
+                                Shahid is the visionary behind Tasvir, with a passion for AI and design. He leads the company with a focus on
                                 innovation and creativity, driven by a mission to make personalized AI images accessible to all.
                             </p>
                         </div>
@@ -82,8 +87,8 @@ const AboutUs = () => {
                 <section className="text-center">
                     <h2 className="text-3xl font-semibold mb-4">Thank You for Your Support</h2>
                     <p className="text-lg">
-                        We are grateful for the continued support of our community and look forward to creating even more amazing things 
-                        together. Whether you're a long-time user or just getting started, we're excited to have you with us on this journey, 
+                        We are grateful for the continued support of our community and look forward to creating even more amazing things
+                        together. Whether you're a long-time user or just getting started, we're excited to have you with us on this journey,
                         powered by the vision and creativity of <strong>Fliptrend</strong>.
                     </p>
                 </section>

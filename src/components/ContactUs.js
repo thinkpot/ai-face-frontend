@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Footer from './Footer'
+import { Helmet } from "react-helmet";
 
 const ContactUs = () => {
     const [formData, setFormData] = useState({
@@ -24,14 +25,18 @@ const ContactUs = () => {
 
     return (
         <div className="min-h-screen bg-gray-100 text-gray-800">
+            <Helmet>
+                <title>Contact Us - Tasvir</title>
+                <meta name="description" content="Get in touch with us at Tasvir for any inquiries or support." />
+            </Helmet>
             <div className="container mx-auto py-10 px-4">
                 <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
 
                 <section className="mb-12">
                     <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
                     <p>
-                        We would love to hear from you! Whether you have a question about our services, pricing, or anything else, our team is 
-                        ready to answer all your questions. Feel free to reach out to us through the contact details below, or simply fill out 
+                        We would love to hear from you! Whether you have a question about our services, pricing, or anything else, our team is
+                        ready to answer all your questions. Feel free to reach out to us through the contact details below, or simply fill out
                         the contact form.
                     </p>
                 </section>
@@ -116,14 +121,14 @@ const ContactUs = () => {
                 <section>
                     <h2 className="text-2xl font-semibold mb-4">FAQs</h2>
                     <p>
-                        Before you reach out, you can check out our <a href="/faqs" className="text-blue-600 hover:underline">Frequently Asked Questions (FAQs)</a> 
+                        Before you reach out, you can check out our <a href="/faqs" className="text-blue-600 hover:underline">Frequently Asked Questions (FAQs)</a>
                         section, where we address the most common queries about our services and policies.
                     </p>
                 </section>
             </div>
             <Footer />
         </div>
-        
+
     );
 };
 

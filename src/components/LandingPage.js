@@ -5,6 +5,7 @@ import logo from '../assets/logo5.png';
 import SubMenu from './SubMenu'
 import { useNavigate } from 'react-router-dom';
 import Footer from './Footer'
+import { Helmet } from "react-helmet";
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -13,7 +14,11 @@ const LandingPage = () => {
     };
     return (
         <div className="min-h-screen bg-white-50 flex flex-col items-center">
-
+            <Helmet>
+                <title>Tasvir - AI Headshot Generator</title>
+                <meta name="description" content="Create personalized AI-generated images of yourself with Tasvir. Upload your photos, train an AI model, and generate unique images in various styles like portraits, cartoons, or headshots." />
+                <meta name="keywords" content="personalized AI face generator, AI image generation, custom AI models, AI portraits, headshots, creative images" />
+            </Helmet>
             <SubMenu />
             {/* Main Section */}
             <section className="text-center mt-16">
