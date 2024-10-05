@@ -1,52 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-// Define styles based on gender
-const maleStyles = [
-  { id: 1, name: 'Masculine Style 1', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_1.jpg' },
-  { id: 2, name: 'Masculine Style 2', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_2.jpg' },
-  { id: 3, name: 'Masculine Style 3', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_3.jpg' },
-  { id: 4, name: 'Masculine Style 4', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_4.jpg' },
-  { id: 5, name: 'Masculine Style 5', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_5.jpg' },
-  { id: 6, name: 'Masculine Style 6', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_6.jpg' },
-  { id: 7, name: 'Masculine Style 7', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_7.jpg' },
-  { id: 8, name: 'Masculine Style 8', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_8.jpg' },
-  { id: 9, name: 'Masculine Style 9', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_9.jpg' },
-  { id: 10, name: 'Masculine Style 10', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/male_styles/male_style_10.jpg' },
-];
-
-const femaleStyles = [
-  { id: 1, name: 'Feminine Style 1', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_1.jpg' },
-  { id: 2, name: 'Feminine Style 2', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_2.jpg' },
-  { id: 3, name: 'Feminine Style 3', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_3.jpg' },
-  { id: 4, name: 'Feminine Style 4', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_4.jpg' },
-  { id: 5, name: 'Feminine Style 5', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_5.jpg' },
-  { id: 6, name: 'Feminine Style 6', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_6.jpg' },
-  { id: 7, name: 'Feminine Style 7', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_7.jpg' },
-  { id: 8, name: 'Feminine Style 8', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_8.jpg' },
-  { id: 9, name: 'Feminine Style 9', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_9.jpg' },
-  { id: 10, name: 'Feminine Style 10', image: 'https://storage.googleapis.com/ai_face_bucket_1/styles/female_styles/female_style_10.jpg' },
-];
+import axios from 'axios';
 
 function StyleSelection() {
   const [selectedStyleId, setSelectedStyleId] = useState(null);
+  const [styles, setStyles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('professional'); // Default tab
   const location = useLocation();
   const navigate = useNavigate();
   const { gender } = location.state || {};
 
-  const styles = gender === 'male' ? maleStyles : femaleStyles;
+  // Fetch styles from the backend based on the selected tab
+  const fetchStyles = async (tab) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/styles/${gender}/${tab}`);
+      setStyles(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching styles:', error);
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    if (gender) {
+      fetchStyles(activeTab);
+    }
+  }, [gender, activeTab]);
+
+  // Handle style selection
   const handleStyleSelection = (id) => {
     setSelectedStyleId(id);
   };
 
+  // Handle generating the image
   const handleGenerateImage = () => {
-    const selectedStyle = styles.find(style => style.id === selectedStyleId);
+    const selectedStyle = styles.find((style) => style.name === selectedStyleId);
     if (selectedStyle) {
       navigate('/model-name', { state: { gender, style: selectedStyle } });
     } else {
-      alert("Please select a style.");
+      alert('Please select a style.');
     }
+  };
+
+  // Handle tab change
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setSelectedStyleId(null); // Reset selected style when tab changes
+    fetchStyles(tab); // Fetch styles for the new tab
   };
 
   return (
@@ -54,25 +57,42 @@ function StyleSelection() {
       <h1 className="text-4xl font-bold mb-4">Select a Style</h1>
       <p className="text-xl text-gray-600 mb-8 text-center">Choose a style for your generated image.</p>
 
-      {/* Container with overflow */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 h-[500px] overflow-y-auto p-4 bg-white rounded-lg shadow-lg">
-        {styles.map((style) => (
-          <div
-            key={style.id}
-            onClick={() => handleStyleSelection(style.id)}
-            className={`cursor-pointer p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105 ${
-              selectedStyleId === style.id ? 'border-4 border-blue-500' : 'border-4 border-transparent'
-            }`}
+      {/* Pills Tabs */}
+      <div className="flex space-x-4 mb-8">
+        {['professional', 'dating'].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => handleTabChange(tab)}
+            className={`px-4 py-2 rounded-full text-lg font-semibold transition-colors duration-300 
+                        ${activeTab === tab ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}`}
           >
-            <img
-              src={style.image}
-              alt={style.name}
-              className="w-full h-auto aspect-[0.75/1] object-cover rounded"
-            />
-            <p className="mt-2 text-lg font-semibold">{style.name}</p>
-          </div>
+            {tab}
+          </button>
         ))}
       </div>
+
+      {loading ? (
+        <p>Loading styles...</p>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 h-[500px] overflow-y-auto p-4 bg-white rounded-lg shadow-lg">
+          {styles.map((style) => (
+            <div
+              key={style.name}
+              onClick={() => handleStyleSelection(style.name)}
+              className={`cursor-pointer p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105 ${
+                selectedStyleId === style.name ? 'border-4 border-blue-500' : 'border-4 border-transparent'
+              }`}
+            >
+              <img
+                src={style.url}
+                alt={style.name}
+                className="w-full h-auto aspect-[0.75/1] object-cover rounded"
+              />
+              <p className="mt-2 text-lg font-semibold">{style.name}</p>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Generate Button */}
       <button
