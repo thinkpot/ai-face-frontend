@@ -6,7 +6,7 @@ function ModelNamePage() {
   const location = useLocation();
   const navigate = useNavigate();
   const { gender, style } = location.state || {};
-
+  
   const handleNext = () => {
     if (!modelName) {
       alert("Please enter a model name.");

@@ -37,9 +37,12 @@ function StyleSelection() {
 
   // Handle generating the image
   const handleGenerateImage = () => {
+    
     const selectedStyle = styles.find((style) => style.name === selectedStyleId);
-    if (selectedStyle) {
-      navigate('/model-name', { state: { gender, style: selectedStyle } });
+  
+    if (selectedStyleId) {
+      
+      navigate('/model-name', { state: { gender, style: selectedStyle.url } });
     } else {
       alert('Please select a style.');
     }
@@ -79,9 +82,8 @@ function StyleSelection() {
             <div
               key={style.name}
               onClick={() => handleStyleSelection(style.name)}
-              className={`cursor-pointer p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105 ${
-                selectedStyleId === style.name ? 'border-4 border-blue-500' : 'border-4 border-transparent'
-              }`}
+              className={`cursor-pointer p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105 ${selectedStyleId === style.name ? 'border-4 border-blue-500' : 'border-4 border-transparent'
+                }`}
             >
               <img
                 src={style.url}

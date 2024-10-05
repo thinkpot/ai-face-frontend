@@ -50,10 +50,6 @@ function UploadPage() {
 
     fetchCharges();
 
-    
-
-    
-
   }, []);
 
   const fetchCredits = async () => {
@@ -125,7 +121,7 @@ function UploadPage() {
     const formData = new FormData();
     formData.append('file', zipContent);
     formData.append('gender', gender);
-    formData.append('style', style.image)
+    formData.append('style', style)
     formData.append('modelName', modelName)
 
     try {
