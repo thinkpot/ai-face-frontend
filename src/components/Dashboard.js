@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DownloadIcon } from '@heroicons/react/solid'
+import { TrashIcon } from '@heroicons/react/solid'
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -16,7 +17,7 @@ const Dashboard = () => {
   const [filter, setFilter] = useState('all'); // Filter for models
   const [activeTab, setActiveTab] = useState('models'); // State to switch between models and images
   const [noImagesMessage, setNoImagesMessage] = useState('');
-  
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -41,7 +42,7 @@ const Dashboard = () => {
       }
     };
 
-    fetchUserData();
+    fetchUserData();    
   }, []);
 
   useEffect(() => {
@@ -61,16 +62,17 @@ const Dashboard = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      
-      if (response.data.images && response.data.images.length === 0) {
+
+      if (response.data.model && response.data.models.length === 0) {
         setNoImagesMessage("No images found for the user.");
         setImages([]); // Clear images if no images found
       } else {
-        setImages(response.data.images);
+        setImages(response.data.models);
+        console.log("Images ", response.data)
         setNoImagesMessage(''); // Clear the message if images are found
       }
     } catch (err) {
-      
+
       console.error('Error fetching images:', err);
     }
   };
@@ -117,43 +119,26 @@ const Dashboard = () => {
     }
   };
 
-  // const fetchPredictions = async () => {
-  //   try {
-  //     const response = await axios.get('https://api.replicate.com/v1/predictions', {
-  //       headers: {
-  //         Authorization: `Bearer ${replicateToken}`,
-  //       },
-  //     });
-  //     setPredictions(response.data.results);
-  //   } catch (err) {
-  //     console.error('Error fetching predictions:', err);
-  //     setError('Error fetching predictions');
-  //   }
-  // };
-
-
-  
-
   const downloadImage = async () => {
     try {
       const response = await fetch(imageUrl);
       const blob = await response.blob();
       const blobUrl = URL.createObjectURL(blob);
-  
+
       const link = document.createElement('a');
       link.href = blobUrl;
       link.download = 'generated_image.jpg';  // Set the filename for the download
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-  
+
       // Revoke the object URL after download
       URL.revokeObjectURL(blobUrl);
     } catch (err) {
       console.error('Error downloading image:', err);
     }
   };
-  
+
 
 
   const downloadImage2 = async (url) => {
@@ -161,21 +146,21 @@ const Dashboard = () => {
       const response = await fetch(url);
       const blob = await response.blob();
       const blobUrl = URL.createObjectURL(blob);
-  
+
       const link = document.createElement('a');
       link.href = blobUrl;
       link.download = 'generated_image.jpg';  // Set the filename for the download
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-  
+
       // Revoke the object URL after download
       URL.revokeObjectURL(blobUrl);
     } catch (err) {
       console.error('Error downloading image:', err);
     }
   };
-  
+
 
   const renderStatusBadge = (status) => {
     switch (status) {
@@ -193,6 +178,37 @@ const Dashboard = () => {
         return <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">Unknown</span>;
     }
   };
+
+  const deleteImage = async (modelId, imageUrl) => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/delete-image`,
+        {
+          modelId: modelId,
+          imageUrl: imageUrl
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }
+        }
+      );
+      // Update state to remove the deleted image
+      setImages(prevImages =>
+        prevImages.map(model =>
+          model.modelId === modelId
+            ? { ...model, images: model.images.filter(img => img !== imageUrl) }
+            : model
+        )
+      );
+
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      // Optionally show an error message to the user
+    }
+  };
+
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -283,27 +299,37 @@ const Dashboard = () => {
 
         {activeTab === 'images' && (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {images.length > 0 ? (
-                images.map((image, index) => (
-                  <div key={index} className="relative bg-white relative p-4 rounded-lg shadow-md">
-                    <img
-                      src={image}  // Updated to directly reference the image URL
-                      alt={`Generated Image ${index + 1}`}
-                      className="w-full h-auto rounded-lg aspect-square object-contain"
-                    />
+            
+            {images.map((model) => (
+              <div key={model.modelId} className="mb-4">
+                <h3 className="p-4 mt-2 mb-2 text-2xl font-bold text-black tracking-wide">
+                  {model.modelName}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {model.images && model.images.length > 0 ? (
+                    model.images.map((image, index) => (
+                      <div key={index} className="relative bg-white relative p-4 rounded-lg shadow-md">
+                        <img
+                          src={image}  // Updated to directly reference the image URL
+                          alt={`Generated Image ${index + 1}`}
+                          className="w-full h-auto rounded-lg aspect-square object-contain"
+                        />
 
-                    <DownloadIcon className="m-5 cursor-pointer absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded w-10"
-                      onClick={() => downloadImage2(image)} />
+                        <DownloadIcon className="m-5 cursor-pointer absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded w-10"
+                          onClick={() => downloadImage2(image)} />
 
-                  </div>
+                        <TrashIcon className='m-5 cursor-pointer absolute top-2 right-14 bg-red-500 text-white py-1 px-3 rounded w-10'
+                          onClick={() => deleteImage(model.modelId, image)} />
 
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-center col-span-full">No images found</p>
+                  )}
+                </div>
+              </div>
+            ))}
 
-                ))
-              ) : (
-                <p className="text-center col-span-full">No images found</p>
-              )}
-            </div>
           </>
         )}
 
@@ -350,7 +376,7 @@ const Dashboard = () => {
                     Download
                   </button> */}
                   <DownloadIcon className="m-2 cursor-pointer absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded w-10"
-                      onClick={ downloadImage} />
+                    onClick={downloadImage} />
                 </div>
               )}
 
