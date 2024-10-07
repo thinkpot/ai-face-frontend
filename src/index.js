@@ -5,6 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from './contexts/AuthContext';
+import ReactGA from 'react-ga';
+
+const GA_TRACKING_ID = 'G-ETEZ1Z57FB'; // Replace with your Tracking ID
+ReactGA.initialize(GA_TRACKING_ID);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
