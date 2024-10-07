@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { load } from '@cashfreepayments/cashfree-js'; // Import Cashfree SDK
 
@@ -6,14 +6,23 @@ const CreditsCashfreeModal = ({ isOpen, onClose, userId }) => {
   const [creditsToAdd, setCreditsToAdd] = useState('');
   const [cashfree, setCashfree] = useState(null);
 
-  const initializeCashfreeSDK = async () => {
-    try {
-      const cashfreeSDK = await load({ mode: 'sandbox' }); // Load Cashfree in sandbox mode
-      setCashfree(cashfreeSDK);
-    } catch (error) {
-      console.error('Error loading Cashfree SDK:', error);
-    }
-  };
+//   const initializeCashfreeSDK = async () => {
+//     try {
+//       const cashfreeSDK = await load({ mode: 'sandbox' }); // Load Cashfree in sandbox mode
+//       setCashfree(cashfreeSDK);
+//     } catch (error) {
+//       console.error('Error loading Cashfree SDK:', error);
+//     }
+//   };
+
+  useEffect(() => {
+    const initializeSDK = async () => {
+      const sdk = await load({ mode: 'sandbox' });
+      setCashfree(sdk);
+    };
+    initializeSDK();
+  }, []);
+
 
   const handlePayment = async () => {
     if (!creditsToAdd || creditsToAdd <= 0) {
@@ -23,9 +32,9 @@ const CreditsCashfreeModal = ({ isOpen, onClose, userId }) => {
 
     try {
       // Load Cashfree SDK only once
-      if (!cashfree) {
-        await initializeCashfreeSDK();
-      }
+    //   if (!cashfree) {
+    //     await initializeCashfreeSDK();
+    //   }
 
       // Create a payment session on your backend
       const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/payment/create-cashfree-order`, {
