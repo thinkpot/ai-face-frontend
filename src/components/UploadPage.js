@@ -3,9 +3,8 @@ import React, { useState, useEffect } from 'react';
 import JSZip from 'jszip';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CloudUploadIcon } from '@heroicons/react/outline';
-import LoginModal from './LoginModal'; // Importing the LoginModal component
-import PaymentModal from './PaymentModal'; // Import the PaymentModal component
-
+import LoginModal from './LoginModal';
+import CashfreePaymentModal from './CashfreePaymentModal'; // Import the new CashfreePaymentModal
 
 function UploadPage() {
   const [userId, setUserId] = useState(null);
@@ -15,25 +14,21 @@ function UploadPage() {
   const [zipping, setZipping] = useState(false);
   const [progress, setProgress] = useState(0);
   const [progressText, setProgressText] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // To control the login modal
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false); // To control the payment modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCashfreeModalOpen, setIsCashfreeModalOpen] = useState(false);
   const [charges, setCharges] = useState({
     modelTrainingCharge: 0,
     imageGenerationCharge: 0,
   });
-
   const [credits, setCredits] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const { gender, style, modelName } = location.state || {};
 
-
-
   useEffect(() => {
-    // Check if the user is logged in
     const token = localStorage.getItem('token');
     if (!token) {
-      setIsModalOpen(true); // Open the modal if not logged in
+      setIsModalOpen(true);
     } else {
       verifyToken(token);
     }
@@ -41,15 +36,14 @@ function UploadPage() {
     const fetchCharges = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/pricing`);
-        console.log("Pricing ", response.data)
-        setCharges(response.data.data); // Set the charges from the API response
+        console.log("Pricing ", response.data);
+        setCharges(response.data.data);
       } catch (error) {
         console.error('Error fetching charges:', error);
       }
     };
 
     fetchCharges();
-
   }, []);
 
   const fetchCredits = async () => {
@@ -63,19 +57,21 @@ function UploadPage() {
       console.error('Error fetching credits:', error);
     }
   };
-  fetchCredits();
-    console.log("Credits i have ", credits)
+
+  useEffect(() => {
+    fetchCredits();
+  }, []);
 
   const verifyToken = async (token) => {
     try {
       await axios.get(`${process.env.REACT_APP_BACKEND_URL}/verify-token`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      await fetchUserId(); // Fetch user ID if token is valid
+      await fetchUserId();
     } catch (error) {
       console.log("Removing invalid token");
-      localStorage.removeItem('token'); // Clear invalid token
-      setIsModalOpen(true); // Open modal if token is invalid
+      localStorage.removeItem('token');
+      setIsModalOpen(true);
     }
   };
 
@@ -87,7 +83,7 @@ function UploadPage() {
           Authorization: `Bearer ${token}`,
         },
       });
-      setUserId(response.data.userId); // Set userId
+      setUserId(response.data.userId);
     }
   };
 
@@ -109,7 +105,6 @@ function UploadPage() {
     photos.forEach(photo => zip.file(photo.name, photo));
     const content = await zip.generateAsync({ type: 'blob' });
 
-    // Proceed to upload after payment
     handleUpload(content);
     setZipping(false);
   };
@@ -121,8 +116,8 @@ function UploadPage() {
     const formData = new FormData();
     formData.append('file', zipContent);
     formData.append('gender', gender);
-    formData.append('style', style)
-    formData.append('modelName', modelName)
+    formData.append('style', style);
+    formData.append('modelName', modelName);
 
     try {
       await axios.post(`${process.env.REACT_APP_BACKEND_URL}/train`, formData, {
@@ -155,11 +150,10 @@ function UploadPage() {
   };
 
   const handleLoginSuccess = (response) => {
-    const token = response.credential; // Assuming Google returns a credential
+    const token = response.credential;
     localStorage.setItem('token', token);
-    setIsModalOpen(false); // Close the modal after successful login
+    setIsModalOpen(false);
     fetchUserId();
-    
   };
 
   const handleLoginError = (error) => {
@@ -167,12 +161,12 @@ function UploadPage() {
     alert('Google login failed. Please try again.');
   };
 
-  const handlePaymentSuccess = () => {
-    // Call the function to create the ZIP file after payment is successful
+  const handlePaymentSuccess = (message) => {
+    console.log(message);
+    fetchCredits(); // Refresh credits after successful payment
     createZipFile();
-    setIsPaymentModalOpen(false); // Close the payment modal
+    setIsCashfreeModalOpen(false);
   };
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -182,14 +176,14 @@ function UploadPage() {
         onLoginSuccess={handleLoginSuccess}
         onLoginError={handleLoginError}
       />
-      <PaymentModal
-        isOpen={isPaymentModalOpen}
-        onClose={() => setIsPaymentModalOpen(false)}
-        userId={userId} // Pass userId here
+      <CashfreePaymentModal
+        isOpen={isCashfreeModalOpen}
+        onClose={() => setIsCashfreeModalOpen(false)}
+        userId={userId}
         onPaymentSuccess={handlePaymentSuccess}
         charges={charges}
       />
-      {!isModalOpen && !isPaymentModalOpen && (
+      {!isModalOpen && !isCashfreeModalOpen && (
         <div className="w-full max-w-4xl p-8 border-2 border-dashed border-gray-300 rounded-lg bg-white shadow-lg flex flex-col items-center">
           <h1 className="text-4xl font-bold mb-4">Upload Your Photos</h1>
 
@@ -218,15 +212,13 @@ function UploadPage() {
               } 
               else if (userId) {
                 if(credits < charges.modelTrainingCharge + charges.imageGenerationCharge){
-                  setIsPaymentModalOpen(true);
-                  // Proceed to payment if userId exists and enough photos are uploaded
+                  setIsCashfreeModalOpen(true);
                 }else{
                   createZipFile();
                 }
-                 
               } else {
                 alert('Please log in to proceed.');
-                setIsModalOpen(true); // Open login modal if not logged in
+                setIsModalOpen(true);
               }
             }}
             className={`relative mt-8 px-6 py-3 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold hover:from-green-500 hover:to-blue-600 transition-transform transform hover:scale-105 focus:outline-none ${zipping || uploading ? 'cursor-wait' : ''}`}
@@ -282,11 +274,7 @@ function UploadPage() {
         </div>
       )}
     </div>
-
-    
   );
 }
 
 export default UploadPage;
-
-/* Working */

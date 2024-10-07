@@ -5,6 +5,7 @@ import './Header.css';
 import Button from './Button';
 import logo from '../assets/logo5.png';
 import CreditsModal from './CreditsModal'; // Import CreditsModal
+import CreditsCashfreeModal from './CreditsCashfreeModal';
 import axios from 'axios';
 
 const Header = () => {
@@ -149,7 +150,7 @@ const Header = () => {
             </button>
 
             {/* Add the CreditsModal component */}
-            <CreditsModal
+            <CreditsCashfreeModal
               isOpen={isCreditsModalOpen}
               onClose={() => setIsCreditsModalOpen(false)}
               userId={userId}
