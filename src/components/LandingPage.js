@@ -6,6 +6,7 @@ import SubMenu from './SubMenu'
 import { useNavigate } from 'react-router-dom';
 import Footer from './Footer'
 import { Helmet } from "react-helmet";
+import Gallery from './Gallery'
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -86,6 +87,7 @@ const LandingPage = () => {
             </section>
 
 
+            <Gallery />
 
             {/* New Image Generation Section */}
             <section className="mt-10 py-12 bg-blue-50 shadow-sm rounded-lg max-w-5xl mx-auto flex flex-col lg:flex-row items-center px-4 lg:px-8">
@@ -128,7 +130,7 @@ const LandingPage = () => {
 
             {/* New Section for Social Media Headshots */}
             <section className="mt-10 py-12 bg-white shadow-sm rounded-lg max-w-5xl mx-auto px-8 flex flex-col md:flex-row items-center">
-                <div className="md:w-1/2 p-4 md:p-6">
+                <div className="flex-1 text-center lg:text-left mb-8 lg:mb-0 lg:ml-6">
                     <h3 className="text-3xl font-semibold mb-6 text-center md:text-left text-gray-800">
                         Create Headshots for Social Media
                     </h3>
@@ -158,11 +160,17 @@ const LandingPage = () => {
                         <h4 className="text-2xl font-bold text-gray-800">Model Training</h4>
                         <p className="text-2xl font-semibold text-blue-600">₹300 (~$4)</p>
                         <p className="text-gray-600">One-time fee for training your model.</p>
+                        <p className="text-gray-600 mt-4">
+                            <strong>Training Time:</strong> <span className="text-blue-600">Only 30 minutes</span>
+                        </p>
                     </div>
                     <div className="p-6 border border-gray-300 rounded-lg shadow-md">
                         <h4 className="text-2xl font-bold text-gray-800">Image Generation</h4>
                         <p className="text-2xl font-semibold text-blue-600">₹7 (~$0.09)</p>
                         <p className="text-gray-600">Per image generated from your model.</p>
+                        <p className="text-gray-600 mt-4">
+                            <strong>Speed:</strong> <span className="text-blue-600">Instant generation</span>
+                        </p>
                     </div>
                 </div>
                 <div className="text-2xl font-semibold text-gray-800 mb-4">

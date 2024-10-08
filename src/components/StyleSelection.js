@@ -90,7 +90,7 @@ function StyleSelection() {
                 alt={style.name}
                 className="w-full h-auto aspect-[0.75/1] object-cover rounded"
               />
-              <p className="mt-2 text-lg font-semibold">{style.name}</p>
+              {/* <p className="mt-2 text-lg font-semibold">{style.name}</p> */}
             </div>
           ))}
         </div>
