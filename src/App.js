@@ -17,8 +17,7 @@ import ContactUs from './components/ContactUs'
 import AboutUs from './components/AboutUs'
 import RefundPolicy from "./components/RefundPolicy"; // Adjust path accordingly
 import PricingPage from './components/PricingPage'
-
-
+import RedeemInvite from './components/RedeemInvite';
 
 
 function App() {
@@ -41,6 +40,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/redeem-invite/:inviteCode" element={<RedeemInvite />} />
 
         
       </Routes>
