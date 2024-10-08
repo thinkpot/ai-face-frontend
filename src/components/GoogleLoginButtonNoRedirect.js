@@ -27,6 +27,8 @@ const GoogleLoginButton = () => {
           // Store the JWT token in local storage or state
           localStorage.setItem('token', data.token);
           localStorage.setItem('profilePic', profile.picture);
+          localStorage.setItem('email', data.user.email);
+          localStorage.setItem('name', data.user.name);
           window.location.href = '/upload'; // Redirect to dashboard or wherever you want
         })
         .catch(error => console.error('Error:', error));

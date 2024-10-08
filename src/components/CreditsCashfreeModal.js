@@ -39,8 +39,8 @@ const CreditsCashfreeModal = ({ isOpen, onClose, userId }) => {
       // Create a payment session on your backend
       const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/payment/create-cashfree-order`, {
         amount: parseInt(creditsToAdd), // Amount in INR
-        customerEmail: "customerEmail@sdsd.com",
-        customerName: "customerName",
+        customerEmail: localStorage.getItem('email'),
+        customerName: localStorage.getItem('name'),
         customerPhone: "+918888888888",
         customerId: userId,
         userId:userId

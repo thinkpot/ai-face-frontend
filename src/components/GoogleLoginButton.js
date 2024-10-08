@@ -25,8 +25,11 @@ const GoogleLoginButton = () => {
         .then(response => response.json())
         .then(data => {
           // Store the JWT token in local storage or state
+          
           localStorage.setItem('token', data.token);
           localStorage.setItem('profilePic', profile.picture);
+          localStorage.setItem('email', data.user.email);
+          localStorage.setItem('name', data.user.name);
           window.location.href = '/dashboard'; // Redirect to dashboard or wherever you want
         })
         .catch(error => console.error('Error:', error));
@@ -48,3 +51,6 @@ const GoogleLoginButton = () => {
 };
 
 export default GoogleLoginButton;
+
+
+/* working */

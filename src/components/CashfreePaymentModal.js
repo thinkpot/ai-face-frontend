@@ -24,8 +24,8 @@ const CashfreePaymentModal = ({ isOpen, onClose, userId, onPaymentSuccess, charg
       const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/payment/create-cashfree-order`, {
         amount: totalAmount, // Amount in paise (multiply by 100)
         customerId: userId,
-        customerEmail: "customerEmail@sdsd.com",
-        customerName: "customerName",
+        customerEmail: localStorage.getItem('email'),
+        customerName: localStorage.getItem('name'),
         customerPhone: "+918888888888",
         userId:userId
       });
