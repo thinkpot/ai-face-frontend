@@ -77,7 +77,7 @@ function StyleSelection() {
       {loading ? (
         <p>Loading styles...</p>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 h-[500px] overflow-y-auto p-4 bg-white rounded-lg shadow-lg">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 h-[500px] overflow-y-auto p-4 bg-white rounded-lg shadow-lg">
           {styles.map((style) => (
             <div
               key={style.name}
