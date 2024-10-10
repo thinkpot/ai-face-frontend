@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DownloadIcon } from '@heroicons/react/solid'
 import { TrashIcon } from '@heroicons/react/solid'
+import PromptGenerator from './PromptGenerator';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -17,6 +18,8 @@ const Dashboard = () => {
   const [filter, setFilter] = useState('all'); // Filter for models
   const [activeTab, setActiveTab] = useState('models'); // State to switch between models and images
   const [noImagesMessage, setNoImagesMessage] = useState('');
+  const [selectedImageModel, setSelectedImageModel] = useState('all');
+  const [showPromptGenerator, setShowPromptGenerator] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -42,7 +45,7 @@ const Dashboard = () => {
       }
     };
 
-    fetchUserData();    
+    fetchUserData();
   }, []);
 
   useEffect(() => {
@@ -140,7 +143,6 @@ const Dashboard = () => {
   };
 
 
-
   const downloadImage2 = async (url) => {
     try {
       const response = await fetch(url);
@@ -214,7 +216,13 @@ const Dashboard = () => {
     setActiveTab(tab);
     if (tab === 'images') {
       fetchImages(); // Fetch images when switching to the images tab
+      setSelectedImageModel('all');
     }
+  };
+
+  const handlePromptGenerated = (generatedPrompt) => {
+    setPrompt(generatedPrompt);
+    setShowPromptGenerator(false);
   };
 
   if (error) {
@@ -276,14 +284,21 @@ const Dashboard = () => {
                   <div
                     key={model.trainModelId}
                     className="bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 cursor-pointer"
-                    onClick={() => handleRowClick(model)}  // Handle click to open modal
+                    onClick={() => handleRowClick(model)} // Handle click to open modal
                   >
+                    {/* Display Model Image */}
+                    <img
+                      src={model.generatedImageUrl} // Assuming generatedImageUrl is available in the model object
+                      alt={model.modelName}
+                      className="w-full h-auto rounded-lg aspect-square object-contain" // Adjust size as needed
+                    />
                     <h3 className="text-lg font-semibold mb-2 truncate">
                       Model Name: <span className="break-words text-blue">{model.modelName}</span>
                     </h3>
+                    {/* Optional: Display Model ID if needed */}
                     {/* <p className="text-gray-600 mb-2">
-                      Model ID: <span className="break-words">{model.modelId}</span>
-                    </p> */}
+          Model ID: <span className="break-words">{model.modelId}</span>
+        </p> */}
                     <p className="text-gray-600 mb-2">
                       Trigger Word: <span className="break-words">{model.trigger_word}</span>
                     </p>
@@ -294,41 +309,61 @@ const Dashboard = () => {
                 <p className="text-center col-span-full">No models found for this status</p>
               )}
             </div>
+
           </>
         )}
 
         {activeTab === 'images' && (
           <>
-            
-            {images.map((model) => (
-              <div key={model.modelId} className="mb-4">
-                <h3 className="p-4 mt-2 mb-2 text-2xl font-bold text-black tracking-wide">
-                  {model.modelName}
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {model.images && model.images.length > 0 ? (
-                    model.images.map((image, index) => (
-                      <div key={index} className="relative bg-white relative p-4 rounded-lg shadow-md">
-                        <img
-                          src={image}  // Updated to directly reference the image URL
-                          alt={`Generated Image ${index + 1}`}
-                          className="w-full h-auto rounded-lg aspect-square object-contain"
-                        />
-
-                        <DownloadIcon className="m-5 cursor-pointer absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded w-10"
-                          onClick={() => downloadImage2(image)} />
-
-                        <TrashIcon className='m-5 cursor-pointer absolute top-2 right-14 bg-red-500 text-white py-1 px-3 rounded w-10'
-                          onClick={() => deleteImage(model.modelId, image)} />
-
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-center col-span-full">No images found</p>
-                  )}
-                </div>
+            <div className="flex justify-between items-center mb-4 mt-4">
+              <h2 className="text-3xl font-bold text-gray-800">Generated Images</h2>
+              <div className="relative">
+                <select
+                  className="block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                  value={selectedImageModel}
+                  onChange={(e) => setSelectedImageModel(e.target.value)}
+                >
+                  <option value="all">All Models</option>
+                  {models.map((model) => (
+                    <option key={model.modelId} value={model.modelId}>
+                      {model.modelName}
+                    </option>
+                  ))}
+                </select>
               </div>
-            ))}
+            </div>
+
+            {images
+              .filter((model) => selectedImageModel === 'all' || model.modelId === selectedImageModel)
+              .map((model) => (
+                <div key={model.modelId} className="mb-4">
+                  <h3 className="text-2xl font-semibold mb-4 text-gray-700 border-b pb-2">
+                    {model.modelName}
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {model.images && model.images.length > 0 ? (
+                      model.images.map((image, index) => (
+                        <div key={index} className="relative bg-white relative p-4 rounded-lg shadow-md">
+                          <img
+                            src={image}  // Updated to directly reference the image URL
+                            alt={`Generated Image ${index + 1}`}
+                            className="w-full h-auto rounded-lg aspect-square object-contain"
+                          />
+
+                          <DownloadIcon className="m-5 cursor-pointer absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded w-10"
+                            onClick={() => downloadImage2(image)} />
+
+                          <TrashIcon className='m-5 cursor-pointer absolute top-2 right-14 bg-red-500 text-white py-1 px-3 rounded w-10'
+                            onClick={() => deleteImage(model.modelId, image)} />
+
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-center col-span-full">No images found</p>
+                    )}
+                  </div>
+                </div>
+              ))}
 
           </>
         )}
@@ -338,50 +373,79 @@ const Dashboard = () => {
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg relative w-full max-w-md">
               <button
-                className="absolute top-0 right-0 m-2 text-gray-600 hover:text-gray-800"
-                onClick={handleModalClose}  // Close the modal
+                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+                onClick={handleModalClose}
               >
-                &times;
+                ✕
               </button>
-              <h2 className="text-xl font-semibold mb-4">Generate Image</h2>
+              <h2 className="text-2xl font-semibold mb-4">Generate Image</h2>
               <p className="text-sm text-gray-500 mb-2">
                 Model ID: {selectedModel.modelId}
               </p>
               <p className="text-sm text-gray-500 mb-4">
                 Trigger Word: {selectedModel.trigger_word}
               </p>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  placeholder="Enter prompt"
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                />
 
-              <input
-                type="text"
-                placeholder="Enter prompt"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-              />
+                <button
+                  className="mt-2 text-blue-500 underline"
+                  onClick={() => setShowPromptGenerator(!showPromptGenerator)}
+                >
+                  {showPromptGenerator ? 'Hide Prompt Generator' : 'Use Automatic Prompt Generator'}
+                </button>
+              </div>
+              {showPromptGenerator && (
+              <PromptGenerator onPromptGenerated={handlePromptGenerated} />
+            )}
+
+
               <button
-                className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg"
+                className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
                 onClick={handleGenerateImage}
                 disabled={loadingImage}
               >
                 {loadingImage ? 'Generating...' : 'Generate Image'}
               </button>
 
-              {imageUrl && (
-                <div className="relative mt-4">
-                  <img src={imageUrl} alt="Generated" className="w-full h-auto rounded-lg" />
-                  {/* <button
-                    className="absolute top-2 right-2 bg-green-500 text-white py-1 px-3 rounded-lg"
-                    onClick={downloadImage}
-                  >
-                    Download
-                  </button> */}
-                  <DownloadIcon className="m-2 cursor-pointer absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded w-10"
-                    onClick={downloadImage} />
+              {loadingImage && (
+                <div className="mt-4 flex justify-center items-center">
+                  <div className="loader"></div>
+                  <span className="ml-2 text-gray-600">Generating image...</span>
                 </div>
               )}
 
+              {imageUrl && !loadingImage && (
+                <div className="relative mt-4">
+                  <img src={imageUrl} alt="Generated" className="w-full h-auto rounded-lg" />
+                  <DownloadIcon className="m-5 cursor-pointer absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded w-10"
+                    onClick={() => downloadImage(imageUrl)} />
+                </div>
+              )}
             </div>
+
+            <style jsx>{`
+        .loader {
+          border: 3px solid #f3f3f3;
+          border-top: 3px solid #3498db;
+          border-radius: 50%;
+          width: 24px;
+          height: 24px;
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
           </div>
+
         )}
       </div>
     </div>
