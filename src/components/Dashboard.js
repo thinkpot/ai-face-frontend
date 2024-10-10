@@ -279,7 +279,7 @@ const Dashboard = () => {
 
             <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
 
-              <span class="font-medium">Info alert!  </span> <span className='ml-1'> Model training will take approximately </span> <span class="font-semibold ml-1"> 30 minutes</span> <span> Check out on image tab after 30 minutes</span>.
+              <span class="font-medium">Info alert!  </span> <span className='ml-1'> Model training will take approximately </span> <span class="font-semibold ml-1"> 30 minutes</span> <span className='ml-1'> Check out on image tab after 30 minutes</span>.
             </div>
 
 
