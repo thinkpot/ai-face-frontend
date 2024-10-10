@@ -277,6 +277,12 @@ const Dashboard = () => {
               </div>
             </div>
 
+            <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+
+              <span class="font-medium">Info alert!  </span> <span className='ml-1'> Model training will take approximately </span> <span class="font-semibold ml-1"> 30 minutes</span> <span> Check out on image tab after 30 minutes</span>.
+            </div>
+
+
             {/* Card Container for Models */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredModels.length > 0 ? (
@@ -288,7 +294,7 @@ const Dashboard = () => {
                   >
                     {/* Display Model Image */}
                     <img
-                      src={model.generatedImageUrl} // Assuming generatedImageUrl is available in the model object
+                      src={model.generatedImageUrl ? model.generatedImageUrl : 'default_model.png'} // Assuming generatedImageUrl is available in the model object
                       alt={model.modelName}
                       className="w-full h-auto rounded-lg aspect-square object-contain" // Adjust size as needed
                     />
@@ -402,8 +408,8 @@ const Dashboard = () => {
                 </button>
               </div>
               {showPromptGenerator && (
-              <PromptGenerator onPromptGenerated={handlePromptGenerated} />
-            )}
+                <PromptGenerator onPromptGenerated={handlePromptGenerated} />
+              )}
 
 
               <button
