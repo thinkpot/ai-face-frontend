@@ -59,7 +59,7 @@ function GenderSelection() {
                 </motion.p>
 
                 <motion.div
-                    className="flex justify-center space-x-12 mb-12"
+                    className="flex justify-center space-x-2 mb-4"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.5, duration: 0.5 }}
