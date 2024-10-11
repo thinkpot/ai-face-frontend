@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
+import { motion } from 'framer-motion';
 
 function GenderSelection() {
     const [selectedGender, setSelectedGender] = useState(null);
@@ -19,7 +20,12 @@ function GenderSelection() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-gray-100 to-gray-300 flex items-center justify-center">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center"
+        >
             <Helmet>
                 <title>Create Your AI Headshot - Choose Gender | Tasvir</title>
                 <meta
@@ -29,49 +35,82 @@ function GenderSelection() {
                 <meta name="keywords" content="AI headshot generator, personalized images, choose gender, Tasvir, AI-generated faces, custom headshots" />
                 <meta name="robots" content="index, follow" />
             </Helmet>
-            <div className="text-center p-8 rounded-xl w-full max-w-4xl">
-                <h1 className="text-4xl font-bold mb-4">AI Face Image Generator</h1>
-                <p className="text-xl text-gray-600 mb-8">Select your gender to begin generating images</p>
+            <motion.div
+                className="text-center p-8 w-full max-w-4xl bg-opacity-90"
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+            >
+                <motion.h1
+                    className="text-5xl font-bold mb-4 text-gray-800"
+                    initial={{ y: -20 }}
+                    animate={{ y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                >
+                    AI Face Image Generator
+                </motion.h1>
+                <motion.p
+                    className="text-xl text-gray-600 mb-12"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
+                >
+                    Select your gender to begin generating images
+                </motion.p>
 
-                <div className="flex justify-center space-x-8 mb-8">
+                <motion.div
+                    className="flex justify-center space-x-12 mb-12"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
+                >
                     {/* Male Selection */}
-                    <div
+                    <motion.div
                         onClick={() => handleSelection('male')}
-                        className={`cursor-pointer p-6 bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 ${selectedGender === 'male' ? 'border-4 border-blue-500' : 'border-4 border-transparent'
-                            }`}
+                        className={`cursor-pointer p-8 bg-white rounded-2xl shadow-lg transition-all duration-300 
+                                    ${selectedGender === 'male' ? 'ring-4 ring-blue-500 shadow-xl' : 'hover:shadow-xl'}`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                     >
                         <img
                             src="/male.png"
                             alt="Male"
-                            className="w-40 h-40 object-cover rounded-full object-top mb-4"
+                            className="w-48 h-48 object-cover rounded-full object-top mb-6"
                         />
-                        <p className="text-lg font-semibold">Male</p>
-                    </div>
+                        <p className="text-xl font-semibold text-gray-800">Male</p>
+                    </motion.div>
 
                     {/* Female Selection */}
-                    <div
+                    <motion.div
                         onClick={() => handleSelection('female')}
-                        className={`cursor-pointer p-6 bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 ${selectedGender === 'female' ? 'border-4 border-pink-500' : 'border-4 border-transparent'
-                            }`}
+                        className={`cursor-pointer p-8 bg-white rounded-2xl shadow-lg transition-all duration-300 
+                                    ${selectedGender === 'female' ? 'ring-4 ring-pink-500 shadow-xl' : 'hover:shadow-xl'}`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                     >
                         <img
                             src="/woman.png"
                             alt="Female"
-                            className="w-40 h-40 object-cover rounded-full object-top mb-4"
+                            className="w-48 h-48 object-cover rounded-full object-top mb-6"
                         />
-                        <p className="text-lg font-semibold">Female</p>
-                    </div>
-                </div>
+                        <p className="text-xl font-semibold text-gray-800">Female</p>
+                    </motion.div>
+                </motion.div>
 
                 {/* Generate Button */}
-                <button
+                <motion.button
                     onClick={handleGenerate}
-                    className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out hover:shadow-xl"
+                    className="px-10 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-xl font-semibold rounded-full shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.6, duration: 0.5 }}
                 >
                     Generate
-                </button>
-            </div>
-        </div>
+                </motion.button>
+            </motion.div>
+        </motion.div>
     );
 }
 

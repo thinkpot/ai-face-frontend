@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { motion } from 'framer-motion';
+import { Loader2, Camera } from 'lucide-react';
 
 function StyleSelection() {
   const [selectedStyleId, setSelectedStyleId] = useState(null);
@@ -37,11 +39,9 @@ function StyleSelection() {
 
   // Handle generating the image
   const handleGenerateImage = () => {
-    
     const selectedStyle = styles.find((style) => style.name === selectedStyleId);
-  
+
     if (selectedStyleId) {
-      
       navigate('/model-name', { state: { gender, style: selectedStyle.url } });
     } else {
       alert('Please select a style.');
@@ -56,54 +56,101 @@ function StyleSelection() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-8">
-      <h1 className="text-4xl font-bold mb-4">Select a Style</h1>
-      <p className="text-xl text-gray-600 mb-8 text-center">Choose a style for your generated image.</p>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 flex flex-col items-center p-8"
+    >
+      <motion.h1
+        initial={{ y: -50 }}
+        animate={{ y: 0 }}
+        className="text-5xl font-bold mb-4 text-blue-800"
+      >
+        Select a Style
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="text-xl text-gray-700 mb-8 text-center max-w-2xl"
+      >
+        Choose a style for your generated image that best represents you.
+      </motion.p>
 
       {/* Pills Tabs */}
-      <div className="flex space-x-4 mb-8">
+      <motion.div
+        className="flex space-x-4 mb-8"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.4 }}
+      >
         {['professional', 'dating'].map((tab) => (
           <button
             key={tab}
             onClick={() => handleTabChange(tab)}
-            className={`px-4 py-2 rounded-full text-lg font-semibold transition-colors duration-300 
-                        ${activeTab === tab ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}`}
+            className={`px-6 py-3 rounded-full text-lg font-semibold transition-all duration-300 
+                        ${activeTab === tab
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'bg-white text-blue-600 hover:bg-blue-100'}`}
           >
-            {tab}
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
         ))}
-      </div>
+      </motion.div>
 
       {loading ? (
-        <p>Loading styles...</p>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex items-center space-x-2"
+        >
+          <Loader2 className="animate-spin" />
+          <p className="text-lg">Loading styles...</p>
+        </motion.div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 h-[500px] overflow-y-auto p-4 bg-white rounded-lg shadow-lg">
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-h-[600px] overflow-y-auto p-6 bg-white rounded-xl shadow-xl"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6 }}
+        >
           {styles.map((style) => (
-            <div
+            <motion.div
               key={style.name}
               onClick={() => handleStyleSelection(style.name)}
-              className={`cursor-pointer p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105 ${selectedStyleId === style.name ? 'border-4 border-blue-500' : 'border-4 border-transparent'
-                }`}
+              className={`cursor-pointer bg-white rounded-lg shadow-md transition-all duration-300 
+                          ${selectedStyleId === style.name
+                  ? 'ring-4 ring-blue-500 shadow-lg'
+                  : 'hover:shadow-lg'}`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <img
                 src={style.url}
                 alt={style.name}
-                className="w-full h-auto aspect-[0.75/1] object-cover rounded"
+                className="w-full h-auto aspect-[0.75/1] object-cover rounded-t-lg"
               />
-              {/* <p className="mt-2 text-lg font-semibold">{style.name}</p> */}
-            </div>
+              {/* <p className="p-2 text-center text-sm font-medium text-gray-700">{style.name}</p> */}
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
 
       {/* Generate Button */}
-      <button
+      <motion.button
         onClick={handleGenerateImage}
-        className="mt-8 px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out hover:shadow-xl"
+        className="mt-8 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-full shadow-lg flex items-center space-x-2"
+        whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(0,0,0,0.2)" }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.8 }}
       >
-        Generate Image
-      </button>
-    </div>
+        <Camera size={24} />
+        <span>Generate Image</span>
+      </motion.button>
+    </motion.div>
   );
 }
 

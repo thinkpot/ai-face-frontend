@@ -169,7 +169,7 @@ function UploadPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
       <LoginModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -186,7 +186,9 @@ function UploadPage() {
       {!isModalOpen && !isCashfreeModalOpen && (
         <div className="w-full max-w-4xl p-8 border-2 border-dashed border-gray-300 rounded-lg bg-white shadow-lg flex flex-col items-center">
           <h1 className="text-4xl font-bold mb-4">Upload Your Photos</h1>
-
+          <p className="text-lg text-gray-600 mb-4">
+            Please upload exactly 10 images to train the model.
+          </p>
           <div className="flex flex-col items-center mb-8">
             <input
               type="file"
@@ -209,11 +211,11 @@ function UploadPage() {
             onClick={() => {
               if (photos.length < 10) {
                 alert('Please upload at least 10 photos.');
-              } 
+              }
               else if (userId) {
-                if(credits < charges.modelTrainingCharge + charges.imageGenerationCharge){
+                if (credits < charges.modelTrainingCharge + charges.imageGenerationCharge) {
                   setIsCashfreeModalOpen(true);
-                }else{
+                } else {
                   createZipFile();
                 }
               } else {

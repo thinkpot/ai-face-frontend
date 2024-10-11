@@ -116,8 +116,8 @@ const Dashboard = () => {
       setImageUrl(response.data.imageUrl);
       setLoadingImage(false);
     } catch (err) {
-      console.error('Error generating image:', err);
-      alert('Failed to generate image.');
+      console.error('Error generating image:', err.response.data.message);
+      alert(err.response.data.message);
       setLoadingImage(false);
     }
   };
@@ -234,7 +234,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-100 p-8 bg-gradient-to-br from-blue-100 to-purple-100">
       <div className="container mx-auto bg-white p-6 rounded-lg shadow-lg">
         {/* Tabs for Models and Images */}
         <div className="border-b border-gray-200">

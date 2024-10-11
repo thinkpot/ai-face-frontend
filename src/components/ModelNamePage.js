@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'
 
 function ModelNamePage() {
   const [modelName, setModelName] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
   const { gender, style } = location.state || {};
-  
+
   const handleNext = () => {
     if (!modelName) {
       alert("Please enter a model name.");
@@ -16,10 +17,17 @@ function ModelNamePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-100">
-      <h1 className="text-4xl font-bold mb-4">Enter Model Name</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center p-8  bg-gradient-to-br from-blue-100 to-purple-100">
+
+      <motion.h1
+        initial={{ y: -50 }}
+        animate={{ y: 0 }}
+        className="text-5xl font-bold mb-4 text-blue-800"
+      >
+        Enter Model Name
+      </motion.h1>
       <p className="text-xl text-gray-600 mb-8 text-center">This name will help you identify your model later.</p>
-      
+
       <input
         type="text"
         value={modelName}
