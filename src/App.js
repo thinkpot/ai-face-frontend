@@ -18,6 +18,8 @@ import AboutUs from './components/AboutUs'
 import RefundPolicy from "./components/RefundPolicy"; // Adjust path accordingly
 import PricingPage from './components/PricingPage'
 import RedeemInvite from './components/RedeemInvite';
+import ProfessionalPhotosPage from './components/pages/ProfessionalPhotosPage';
+import DatingPhotosPage from './components/pages/DatingPhotosPage';
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/professional-ai-photos" element={<ProfessionalPhotosPage />} />
+        <Route path="/dating-ai-photos" element={<DatingPhotosPage />} />
         <Route path="/redeem-invite/:inviteCode" element={<RedeemInvite />} />
 
         

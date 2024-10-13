@@ -16,9 +16,9 @@ const LandingPage = () => {
     return (
         <div className="min-h-screen bg-white-50 flex flex-col items-center">
             <Helmet>
-                <title>Tasvir - AI Headshot Generator</title>
+                <title>The World's Most Popular & Cheapest AI Headshot Generator</title>
                 <meta name="description" content="Create personalized AI-generated images of yourself with Tasvir. Upload your photos, train an AI model, and generate unique images in various styles like portraits, cartoons, or headshots." />
-                <meta name="keywords" content="personalized AI face generator, AI image generation, custom AI models, AI portraits, headshots, creative images" />
+                <meta name="keywords" content="cheapest ai headshot generator, ai headshot generator, betterpic, ai professional headshot, instaheadshots, ai headshot generator free, ai headshots headshot generator, free ai headshot generator, ai photo editor, headshotpro, ai business photo, argon ai, personalised, professional photo ai, professional headshots, headshotpro, ai business photo, ai profile picture generator, ai professional photo generator, linkdin headshot generator, ai corporate headshot free ,ai professional headshot generator, generate headshots using ai free, professional headshot ai free" />
             </Helmet>
             <SubMenu />
             {/* Main Section */}

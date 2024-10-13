@@ -16,6 +16,18 @@ const SubMenu = () => {
                 </li>
                 <li 
                     className="text-gray-800 font-semibold cursor-pointer hover:text-blue-500 transition-colors"
+                    onClick={() => navigate('/dating-ai-photos')}
+                >
+                    Dating
+                </li>
+                <li 
+                    className="text-gray-800 font-semibold cursor-pointer hover:text-blue-500 transition-colors"
+                    onClick={() => navigate('/professional-ai-photos')}
+                >
+                    Professional
+                </li>
+                <li 
+                    className="text-gray-800 font-semibold cursor-pointer hover:text-blue-500 transition-colors"
                     onClick={() => navigate('/contact')}
                 >
                     Contact Us
