@@ -21,12 +21,14 @@ const Gallery = () => {
     return (
         <section className="py-16">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h3 className="text-4xl font-extrabold mb-8 text-center text-gray-900 tracking-tight">
-                    Explore Our AI-Crafted Masterpieces
+                <h3 class="text-4xl font-extrabold mb-8 text-center text-gray-900 tracking-tight">
+                    Discover Our Stunning AI Generated Headshots
                 </h3>
+
                 <p className="text-center text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
-                    Discover a collection of stunning AI-generated images, each crafted uniquely by our powerful models.
+                    Discover our collection of stunning AI generated images, including professional and casual headshots, AI LinkedIn photos, and personalized business images. Use our AI headshot generator for free to create the best AI headshot tailored for your needs!
                 </p>
+
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     {images.map((image, index) => (

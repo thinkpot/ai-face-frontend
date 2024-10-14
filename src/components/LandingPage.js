@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from './Footer'
 import { Helmet } from "react-helmet";
 import Gallery from './Gallery'
+import TasvirFeatures from './FeaturesComponent';
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -17,18 +18,22 @@ const LandingPage = () => {
         <div className="min-h-screen bg-white-50 flex flex-col items-center">
             <Helmet>
                 <title>The World's Most Popular & Cheapest AI Headshot Generator</title>
-                <meta name="description" content="Create personalized AI-generated images of yourself with Tasvir. Upload your photos, train an AI model, and generate unique images in various styles like portraits, cartoons, or headshots." />
-                <meta name="keywords" content="cheapest ai headshot generator, ai headshot generator, betterpic, ai professional headshot, instaheadshots, ai headshot generator free, ai headshots headshot generator, free ai headshot generator, ai photo editor, headshotpro, ai business photo, argon ai, personalised, professional photo ai, professional headshots, headshotpro, ai business photo, ai profile picture generator, ai professional photo generator, linkdin headshot generator, ai corporate headshot free ,ai professional headshot generator, generate headshots using ai free, professional headshot ai free" />
+                <meta name="description" content="Tasvir offers the cheapest headshot generator and AI-powered professional photos for LinkedIn, social media, and casual headshots. Get stunning AI dating photos and enhance your online presence with our affordable, high-quality headshot solutions. Try our free AI headshot generator today for casual and professional use!" />
+                <meta name="keywords" content="cheapest ai headshot generator, ai headshot generator, betterpic, ai professional headshot, instaheadshots, ai headshot generator free, ai headshots, headshot generator, free ai headshot generator, ai photo editor, headshotpro, ai business photo, argon ai, personalised, professional photo ai, ai business photo generator, ai enhanced professional headshot, ai professional headshots, ai profile picture generator, ai corporate headshots free, generate headshots using ai free, professional headshot ai free, ai linkedin photo, ai photo generator, ai photo generator for social media, free ai dating photo generator, casual headshots" />
             </Helmet>
             <SubMenu />
             {/* Main Section */}
             <section className="text-center mt-16">
+                <h1 className='my-4'>The #1 Fastest and Cheapest AI Headshot Generator for Professional Photos and More</h1>
                 <h2 className="text-5xl font-bold text-gray-800">
                     The World's Most Popular AI Headshot Generator
                 </h2>
                 <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
-                    Get professional AI headshots in minutes with our new AI headshot generator. Save hundreds of dollars and hours of your time. Built by AI researchers.
+                    Create professional AI headshots in minutes! Generate stunning AI LinkedIn photos and CV photos effortlessly with our AI headshot generator.
                 </p>
+
+
+
                 <CreateHeadshotButton onClick={() => window.location.href = '/gender'} />
                 <div className="mt-4">
                     <p className="text-gray-600">Trusted by leading professionals</p>
@@ -94,8 +99,7 @@ const LandingPage = () => {
                 <div className="flex-1 text-center lg:text-left mb-8 lg:mb-0">
                     <h3 className="text-3xl font-semibold mb-6 text-gray-800">Generate Any Type of Image from Text!</h3>
                     <p className="text-gray-600 mb-8">
-                        Our advanced AI technology allows you to create stunning images from simple text prompts.
-                        Whether it's a portrait, landscape, or abstract art, the possibilities are endless!
+                        Our AI technology lets you create stunning professional photos and casual headshots from simple text prompts. Whether you need an AI LinkedIn photo or a captivating portrait, our AI photo generator unlocks endless possibilities!
                     </p>
 
                     <CreateHeadshotButton onClick={() => window.location.href = '/gender'} text={"Start Generating Images"} />
@@ -121,9 +125,9 @@ const LandingPage = () => {
                 <div className="flex-1 text-center lg:text-left mb-8 lg:mb-0 lg:ml-6"> {/* Added lg:ml-6 for margin */}
                     <h3 className="text-3xl font-semibold mb-6 text-gray-800">Create Professional Headshots for LinkedIn</h3>
                     <p className="text-gray-600 mb-8">
-                        Transform your selfies into stunning professional headshots perfect for your LinkedIn profile.
-                        Stand out in your industry with a polished look!
+                        Transform your selfies into stunning AI professional headshots perfect for your LinkedIn profile. Stand out in your industry with a polished look that elevates your professional image!
                     </p>
+
                     <CreateHeadshotButton onClick={() => window.location.href = '/gender'} />
                 </div>
             </section>
@@ -132,11 +136,12 @@ const LandingPage = () => {
             <section className="mt-10 py-12 bg-white shadow-sm rounded-lg max-w-5xl mx-auto px-8 flex flex-col md:flex-row items-center">
                 <div className="flex-1 text-center lg:text-left mb-8 lg:mb-0 lg:ml-6">
                     <h3 className="text-3xl font-semibold mb-6 text-center md:text-left text-gray-800">
-                        Create Headshots for Social Media
+                        Create Stunning Social Media Headshots
                     </h3>
                     <p className="text-gray-600 text-center md:text-left mb-4">
-                        Stand out on platforms like Instagram and Facebook with a professional avatar tailored just for you.
+                        Stand out on Instagram and Facebook with personalized AI generated avatars and professional photos tailored just for you.
                     </p>
+
                     <CreateHeadshotButton onClick={() => window.location.href = '/gender'} text={"Create Your Avatar"} />
                 </div>
                 <div className="md:w-1/2 mt-6 md:mt-0 flex justify-center">
@@ -148,13 +153,17 @@ const LandingPage = () => {
                 </div>
             </section>
 
+            <section>
+                <TasvirFeatures />
+            </section>
+
             {/* Pricing Section */}
             <section className="mt-10 py-12 bg-whiterounded-lg max-w-5xl mx-auto px-8 text-center">
                 <h3 className="text-3xl font-semibold mb-4 text-gray-800">Affordable Pricing</h3>
                 <p className="text-gray-600 mb-6">
-                    Our pricing is the lowest in the market with the best results!
-                    Get started with our competitive rates:
+                    Our pricing is the lowest in the market, making us the cheapest headshot generator with the best results! Start using our cheap AI photo generator today and take advantage of our competitive rates.
                 </p>
+
                 <div className="flex justify-center space-x-2 mb-6">
                     <div className="p-6 border border-gray-300 rounded-lg shadow-md">
                         <h4 className="text-2xl font-bold text-gray-800">Model Training</h4>
