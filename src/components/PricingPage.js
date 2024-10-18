@@ -14,7 +14,7 @@ const PricingPage = () => {
       <div className="flex justify-center space-x-4 mb-8">
         <div className="p-6 border border-gray-300 rounded-lg shadow-md">
           <h4 className="text-2xl font-bold text-gray-800">Model Training</h4>
-          <p className="text-2xl font-semibold text-blue-600">₹300 (~$4)</p>
+          <p className="text-2xl font-semibold text-blue-600">₹349 (~$4)</p>
           <p className="text-gray-600">One-time fee for training your personalized AI model.</p>
           <p className="text-gray-600 mt-4">
             <strong>Training Time:</strong> <span className="text-blue-600">Only 30 minutes</span>
