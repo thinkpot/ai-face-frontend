@@ -183,7 +183,7 @@ const LandingPage = () => {
                     </div>
                 </div>
                 <div className="text-2xl font-semibold text-gray-800 mb-4">
-                    <span className="text-lg font-medium">Total Pricing:</span> ₹307 (~$4.09)
+                    <span className="text-lg font-medium">Total Pricing:</span> ₹356 (~$4.09)
                 </div>
                 <p className="text-gray-600 mb-6">
                     Start creating amazing AI headshots today!
