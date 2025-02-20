@@ -12,7 +12,7 @@ const PromptGenerator = ({ onPromptGenerated }) => {
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/generate-prompt`, {
         desire: `${desire}`,
       });
-      setGeneratedPrompt(response.data.data);
+      setGeneratedPrompt(response.data.prompt);
       setIsLoading(false);
     } catch (error) {
       console.error('Error generating prompt:', error);

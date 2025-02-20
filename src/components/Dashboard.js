@@ -3,6 +3,9 @@ import axios from 'axios';
 import { DownloadIcon } from '@heroicons/react/solid'
 import { TrashIcon } from '@heroicons/react/solid'
 import PromptGenerator from './PromptGenerator';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import StyleSelectionModal from './StyleSelectionModal';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -20,6 +23,15 @@ const Dashboard = () => {
   const [noImagesMessage, setNoImagesMessage] = useState('');
   const [selectedImageModel, setSelectedImageModel] = useState('all');
   const [showPromptGenerator, setShowPromptGenerator] = useState(false);
+  const [isGenerateModalOpen, setIsGenerateModalOpen] = useState(false);
+  const [isStyleModalOpen, setIsStyleModalOpen] = useState(false);
+  const [selectedStyle, setSelectedStyle] = useState(null);
+  const navigate = useNavigate();
+
+
+  const handleCreateModel = () => {
+    navigate('/gender');
+  }
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -37,6 +49,7 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+       
         setModels(modelResponse.data);
         setFilteredModels(modelResponse.data); // Set the filtered models initially to all models
       } catch (err) {
@@ -82,8 +95,14 @@ const Dashboard = () => {
 
   // This function handles the click event on a model card to open the modal
   const handleRowClick = (model) => {
-    setSelectedModel(model);  // Set the clicked model
-    setShowModal(true);       // Show the modal
+    console.log('Selected Model Data:', model); // Log entire model data
+    console.log('Model Gender:', model.gender); // Log specifically the gender field
+    
+    setSelectedModel({
+      ...model,
+      gender: model.gender || 'male'
+    });
+    setShowModal(true);
   };
 
   const handleModalClose = () => {
@@ -98,14 +117,17 @@ const Dashboard = () => {
       const token = localStorage.getItem('token');
       setLoadingImage(true);
 
+      const requestData = {
+        version: selectedModel.version,
+        prompt: prompt,
+        trigger_word: selectedModel.trigger_word,
+        modelId: selectedModel.modelId,
+        ...(selectedStyle && { styleUrl: selectedStyle.url })
+      };
+
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/generate/generate-image`,
-        {
-          version: selectedModel.version,
-          prompt: prompt,
-          trigger_word: selectedModel.trigger_word,
-          modelId: selectedModel.modelId
-        },
+        requestData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -115,6 +137,9 @@ const Dashboard = () => {
       );
       setImageUrl(response.data.imageUrl);
       setLoadingImage(false);
+      setSelectedStyle(null);
+      setPrompt('');
+      setIsGenerateModalOpen(false);
     } catch (err) {
       console.error('Error generating image:', err.response.data.message);
       alert(err.response.data.message);
@@ -225,6 +250,16 @@ const Dashboard = () => {
     setShowPromptGenerator(false);
   };
 
+  const handleStyleSelect = (style) => {
+    setSelectedStyle(style);
+    // You can use the selected style URL here for your image generation
+    console.log('Selected style:', style);
+  };
+
+  const handlePromptChange = (e) => {
+    setPrompt(e.target.value);
+  };
+
   if (error) {
     return <div className="text-red-600 text-center">{error}</div>;
   }
@@ -262,18 +297,25 @@ const Dashboard = () => {
             <div className="flex justify-between items-center mb-4 mt-4">
               <h2 className="text-2xl font-semibold">Your Training Models</h2>
               {/* Filter Dropdown */}
-              <div className="relative">
-                <select
-                  className="block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value)}
-                >
-                  <option value="all">All Status</option>
-                  <option value="succeeded">Succeeded</option>
-                  <option value="progress">In Progress</option>
-                  <option value="processing">Running</option>
-                  <option value="canceled">Cancelled</option>
-                </select>
+              <div className="flex items-center gap-2">
+
+                <button onClick={handleCreateModel} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
+                  Create Model
+                </button>
+
+                <div className="relative">
+                  <select
+                    className="block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                  >
+                    <option value="all">All Status</option>
+                    <option value="succeeded">Succeeded</option>
+                    <option value="progress">In Progress</option>
+                    <option value="processing">Running</option>
+                    <option value="canceled">Cancelled</option>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -376,64 +418,85 @@ const Dashboard = () => {
 
         {/* Modal for Viewing Model Details */}
         {showModal && selectedModel && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg relative w-full max-w-md">
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
+            <div className="bg-white p-6 rounded-lg shadow-lg relative w-full max-w-md max-h-[90vh] overflow-y-auto">
               <button
-                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 z-10"
                 onClick={handleModalClose}
               >
                 ✕
               </button>
-              <h2 className="text-2xl font-semibold mb-4">Generate Image</h2>
-              <p className="text-sm text-gray-500 mb-2">
-                Model ID: {selectedModel.modelId}
-              </p>
-              <p className="text-sm text-gray-500 mb-4">
-                Trigger Word: {selectedModel.trigger_word}
-              </p>
-              <div className="mb-4">
-                <input
-                  type="text"
-                  placeholder="Enter prompt"
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                />
+              <div className="space-y-4">
+                <h2 className="text-2xl font-semibold">Generate Image</h2>
+                <p className="text-sm text-gray-500">
+                  Model ID: {selectedModel.modelId}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Trigger Word: {selectedModel.trigger_word}
+                </p>
+                <div className="mb-4">
+                  <button
+                    onClick={() => setIsStyleModalOpen(true)}
+                    className="w-full px-4 py-2 bg-blue-100 text-blue-600 rounded-md hover:bg-blue-200 transition-colors mb-4"
+                  >
+                    Choose Style Reference
+                  </button>
+
+                  {selectedStyle && (
+                    <div className="mb-4">
+                      <p className="text-sm text-gray-600 mb-2">Selected Style:</p>
+                      <img
+                        src={selectedStyle.url}
+                        alt="Selected style"
+                        className="w-20 h-20 object-cover rounded-md"
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    placeholder="Enter your prompt"
+                    className="w-full p-2 border rounded-md mb-4"
+                    value={prompt}
+                    onChange={handlePromptChange}
+                  />
+
+                  <button
+                    className="mt-2 text-blue-500 underline"
+                    onClick={() => setShowPromptGenerator(!showPromptGenerator)}
+                  >
+                    {showPromptGenerator ? 'Hide Prompt Generator' : 'Use Automatic Prompt Generator'}
+                  </button>
+                </div>
+                {showPromptGenerator && (
+                  <PromptGenerator onPromptGenerated={handlePromptGenerated} />
+                )}
+
 
                 <button
-                  className="mt-2 text-blue-500 underline"
-                  onClick={() => setShowPromptGenerator(!showPromptGenerator)}
+                  className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
+                  onClick={handleGenerateImage}
+                  disabled={loadingImage}
                 >
-                  {showPromptGenerator ? 'Hide Prompt Generator' : 'Use Automatic Prompt Generator'}
+                  {loadingImage ? 'Generating...' : 'Generate Image'}
                 </button>
+
+                {loadingImage && (
+                  <div className="mt-4 flex justify-center items-center">
+                    <div className="loader"></div>
+                    <span className="ml-2 text-gray-600">Generating image...</span>
+                  </div>
+                )}
+
+                {imageUrl && !loadingImage && (
+                  <div className="relative mt-4">
+                    <img src={imageUrl} alt="Generated" className="w-full h-auto rounded-lg" />
+                    <DownloadIcon className="m-5 cursor-pointer absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded w-10"
+                      onClick={() => downloadImage(imageUrl)} />
+                  </div>
+                )}
               </div>
-              {showPromptGenerator && (
-                <PromptGenerator onPromptGenerated={handlePromptGenerated} />
-              )}
-
-
-              <button
-                className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
-                onClick={handleGenerateImage}
-                disabled={loadingImage}
-              >
-                {loadingImage ? 'Generating...' : 'Generate Image'}
-              </button>
-
-              {loadingImage && (
-                <div className="mt-4 flex justify-center items-center">
-                  <div className="loader"></div>
-                  <span className="ml-2 text-gray-600">Generating image...</span>
-                </div>
-              )}
-
-              {imageUrl && !loadingImage && (
-                <div className="relative mt-4">
-                  <img src={imageUrl} alt="Generated" className="w-full h-auto rounded-lg" />
-                  <DownloadIcon className="m-5 cursor-pointer absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded w-10"
-                    onClick={() => downloadImage(imageUrl)} />
-                </div>
-              )}
             </div>
 
             <style jsx>{`
@@ -451,8 +514,15 @@ const Dashboard = () => {
         }
       `}</style>
           </div>
-
         )}
+
+        {/* Style Selection Modal */}
+        <StyleSelectionModal
+          isOpen={isStyleModalOpen}
+          onClose={() => setIsStyleModalOpen(false)}
+          gender={selectedModel?.gender || 'male'} // Pass the gender from selected model
+          onStyleSelect={handleStyleSelect}
+        />
       </div>
     </div>
   );
